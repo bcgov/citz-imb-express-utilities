@@ -1,0 +1,10 @@
+version: 1
+data_management_roles:
+  product_owner: Laura Benson
+product_information:
+  ministry: CITZ
+  product_acronym:
+  product_description: An npm package that offers utility functions for Express APIs.
+  product_name: citz-imb-express-utilities
+product_technology_information:
+  hosting_platforms: Not-Applicable
