@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: citz-imb-express-utilities-npm-package
+  title: CITZ IMB Express Utilities (NPM Package)
+  description: An npm package that offers utility functions for an Express API.
+  annotations:
+    github.com/project-slug: bcgov/citz-imb-express-utilities
+    backstage.io/techdocs-ref: dir:.
+    bcgovpubcode.gov.bc.ca/ministry: CITZ
+    bcgovpubcode.gov.bc.ca/product_name: citz-imb-express-utilities
+    bcgovpubcode.gov.bc.ca/product_owner: Laura Benson
+    developer.gov.bc.ca/source_template: default/docs-template-pr
+spec:
+  type: documentation
+  lifecycle: experimental
+  owner: group:default/citz-imb-common-code
