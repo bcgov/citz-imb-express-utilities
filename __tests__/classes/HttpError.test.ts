@@ -9,7 +9,7 @@ describe('HttpError', () => {
     const statusCode = 404;
 
     // Create an instance of HttpError
-    const error = new HttpError(errorMessage, statusCode);
+    const error = new HttpError(statusCode, errorMessage);
 
     // Verify that error is an instance of HttpError
     expect(error instanceof HttpError).toBe(true);

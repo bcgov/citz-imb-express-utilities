@@ -32,7 +32,7 @@ describe('errorWrapper', () => {
 
   // Test case: Ensure HttpError instances are caught and handled properly
   it('should catch and handle HttpError instances', async () => {
-    const error = new HttpError('Custom error message', HTTP_STATUS_CODES.BAD_REQUEST);
+    const error = new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Custom error message');
     mockHandler.mockRejectedValueOnce(error);
 
     await errorWrapper(mockHandler)(mockRequest as Request, mockResponse as Response, mockNext);
