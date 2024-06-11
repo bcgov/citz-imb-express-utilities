@@ -59,4 +59,48 @@ describe('errorWrapper', () => {
       message: 'Generic error',
     });
   });
+
+  // Test case: Ensure custom log function is called if provided
+  it('should call custom log function if provided', async () => {
+    const error = new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Custom error message');
+    mockHandler.mockRejectedValueOnce(error);
+
+    const customLogFunction = jest.fn();
+    const options = { customLogFunction };
+
+    await errorWrapper(mockHandler, options)(
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext,
+    );
+
+    expect(customLogFunction).toHaveBeenCalledWith({
+      method: mockRequest.method,
+      originalUrl: mockRequest.originalUrl,
+      statusCode: HTTP_STATUS_CODES.BAD_REQUEST,
+      message: 'Custom error message',
+    });
+  });
+
+  // Test case: Ensure custom JSON response is used if provided
+  it('should use custom JSON response if provided', async () => {
+    const error = new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Custom error message');
+    mockHandler.mockRejectedValueOnce(error);
+
+    const customJsonResponse = jest.fn().mockReturnValue({
+      customKey: 'customValue',
+    });
+    const options = { customJsonResponse };
+
+    await errorWrapper(mockHandler, options)(
+      mockRequest as Request,
+      mockResponse as Response,
+      mockNext,
+    );
+
+    expect(mockResponse.status).toHaveBeenCalledWith(HTTP_STATUS_CODES.BAD_REQUEST);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      customKey: 'customValue',
+    });
+  });
 });

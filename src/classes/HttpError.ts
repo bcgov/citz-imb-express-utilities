@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'src/constants';
+import { HttpStatusCode } from 'src/types';
 
 export class HttpError extends Error {
   statusCode: HttpStatusCode | number;

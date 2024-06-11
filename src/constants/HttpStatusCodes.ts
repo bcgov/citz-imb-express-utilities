@@ -35,5 +35,3 @@ export const HTTP_STATUS_CODES = {
   GATEWAY_TIMEOUT: 504,
   NOT_EXTENDED: 510,
 } as const;
-
-export type HttpStatusCode = (typeof HTTP_STATUS_CODES)[keyof typeof HTTP_STATUS_CODES];
