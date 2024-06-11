@@ -38,7 +38,7 @@ export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: errorWrapper -->
 ```TypeScript
-const errorWrapper: (handler: ExpressRouteHandler) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
+const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
 ```
 
 Type of `ExpressRouteHandler`:
@@ -47,6 +47,30 @@ Type of `ExpressRouteHandler`:
 <!-- TYPE: ExpressRouteHandler -->
 ```TypeScript
 type ExpressRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void | Response<unknown> | undefined>;
+```
+
+Type of `ErrorWrapperOptions`:
+
+<!-- The following code block is auto generated when types in the package change. -->
+<!-- TYPE: ErrorWrapperOptions -->
+```TypeScript
+type ErrorWrapperOptions = {
+    customLogFunction?: (props: RouteHandlerErrorProperties) => void;
+    customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
+}
+```
+
+Type of `RouteHandlerErrorProperties`:
+
+<!-- The following code block is auto generated when types in the package change. -->
+<!-- TYPE: RouteHandlerErrorProperties -->
+```TypeScript
+type RouteHandlerErrorProperties = {
+    method: string;
+    originalUrl: string;
+    statusCode: HttpStatusCode | number;
+    message: string;
+}
 ```
 
 ## Parameters
@@ -69,11 +93,29 @@ An API reference for the parameters of the `errorWrapper` function.
 
   <!-- Table rows -->
   <tbody>
-  <tr>
+    <tr>
       <td>* handler</td>
       <td>ExpressRouteHandler</td>
       <td>-</td>
       <td>The express route handler (controller) function that is called when accessing a route.</td>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td>ErrorWrapperOptions</td>
+      <td>-</td>
+      <td>Configuration options.</td>
+    </tr>
+    <tr>
+      <td>options.customLogFunction</td>
+      <td>(props: RouteHandlerErrorProperties) => void;</td>
+      <td>-</td>
+      <td>Custom function to call instead of the default log message.</td>
+    </tr>
+    <tr>
+      <td>options.customJsonResponse</td>
+      <td>(props: RouteHandlerErrorProperties) => object;</td>
+      <td>-</td>
+      <td>Custom json response to send to the client.</td>
     </tr>
   </tbody>
 </table>

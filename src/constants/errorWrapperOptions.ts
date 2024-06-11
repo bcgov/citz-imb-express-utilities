@@ -1,4 +1,4 @@
-import { RouteHandlerErrorProperties } from 'src/types';
+import { RouteHandlerErrorProperties } from '../types';
 
 export const DEFAULT_CUSTOM_LOG_FUNCTION = ({
   method,

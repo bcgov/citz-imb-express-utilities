@@ -46,8 +46,8 @@ export const getConfig = errorWrapper(async (req: Request, res: Response) => {
 <!-- TYPE: HttpError -->
 ```TypeScript
 class HttpError extends Error {
-    statusCode: HttpStatusCode$1 | number;
-    constructor(statusCode: HttpStatusCode$1 | number, message: string);
+    statusCode: HttpStatusCode | number;
+    constructor(statusCode: HttpStatusCode | number, message: string);
 }
 ```
 
