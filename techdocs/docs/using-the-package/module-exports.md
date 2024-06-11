@@ -12,5 +12,8 @@ import {
 // TypeScript Types:
 import {
   HttpStatusCode, // Type of a property in HTTP_STATUS_CODES
+  ExpressRouteHandler, // Type of handler parameter to errorWrapper.
+  RouteHandlerErrorProperties, // Properties given in errorWrapper options functions.
+  ErrorWrapperOptions, // Configuration options for errorWrapper.
 } from '@bcgov/citz-imb-express-utilities';
 ```
