@@ -21,3 +21,10 @@ export type ErrorWrapperOptions = {
   customLogFunction?: (props: RouteHandlerErrorProperties) => void;
   customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
 };
+
+export type ZodValidationErrorDetail = {
+  path: (string | number)[];
+  expected: string;
+  received: string;
+  message: string;
+};
