@@ -13,7 +13,7 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ['cookie-parser', 'cors', 'express'],
+    external: ['express', 'zod'],
     plugins: [
       resolve(),
       commonjs(),
