@@ -7,6 +7,21 @@ nav:
   - Introduction: index.md
   - Getting Started:
       - Installing the Package: getting-started/installing-the-package.md
+  - Using The Package:
+      - APIs & Components:
+          - errorWrapper: using-the-package/apis-&-components/error-wrapper.md
+          - Zod:
+              - .refine Functions:
+                  - refineAtLeastOneNonEmpty: using-the-package/apis-&-components/refine-functions/at-least-one-non-empty.md
+              - .transform Functions:
+                  - transformRemoveEmpty: using-the-package/apis-&-components/transform-functions/remove-empty.md
+              - Path & Query Params:
+                  - stringParam: using-the-package/apis-&-components/route-params/string-param.md
+                  - booleanParam: using-the-package/apis-&-components/route-params/boolean-param.md
+                  - numberParam: using-the-package/apis-&-components/route-params/number-param.md
+                  - integerParam: using-the-package/apis-&-components/route-params/integer-param.md
+      - Module Exports: using-the-package/module-exports.md
+      - TypeScript Types: using-the-package/typescript-types.md
   - Major Releases:
       - 1.0.0: major-releases/major-release-1.md
 

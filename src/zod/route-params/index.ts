@@ -1,4 +1,4 @@
 export * from './stringParam';
-export * from './transformBooleanParam';
-export * from './transformIntegerParam';
-export * from './transformNumberParam';
+export * from './booleanParam';
+export * from './integerParam';
+export * from './numberParam';
