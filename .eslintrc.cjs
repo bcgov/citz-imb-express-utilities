@@ -31,6 +31,7 @@ module.exports = {
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused function arguments starting with _
     'no-use-before-define': ['error', { functions: false, classes: true, variables: true }], // Allow variable hoisting for easier-to-read code.
     'prefer-const': 'error', // Encourage use of const where possible.
+    'no-prototype-builtins': 'off', // Allow use of object.hasOwnProperty('')
     '@typescript-eslint/ban-types': [
       'error',
       {
