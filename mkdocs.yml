@@ -1,7 +1,7 @@
 site_name: 'CITZ IMB Express Utilities (NPM Package)'
 site_description: 'An npm package that provides utility functions for Express APIs, aimed at reducing code complexity, enhancing data integrity and security, and promoting consistency and scalability.'
 docs_dir: 'techdocs/docs'
-repo_url: 'https://github.com/bcgov/citz-imb-sso-react'
+repo_url: 'https://github.com/bcgov/citz-imb-express-utilities'
 edit_uri: edit/main/techdocs/docs
 nav:
   - Introduction: index.md
