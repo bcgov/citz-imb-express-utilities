@@ -13,9 +13,9 @@ nav:
           - Zod:
               - Middleware: using-the-package/apis-&-components/zod/zod-validation-middleware.md
               - Param Validation:
-                  - getZodValidatedParams: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-params.md
-                  - getZodValidatedQuery: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-query.md
-                  - getZodValidatedBody: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-body.md
+                  - Req Params: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-params.md
+                  - Req Query: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-query.md
+                  - Req Body: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-body.md
                   - stringParam: using-the-package/apis-&-components/zod/route-params/string-param.md
                   - booleanParam: using-the-package/apis-&-components/zod/route-params/boolean-param.md
                   - numberParam: using-the-package/apis-&-components/zod/route-params/number-param.md
