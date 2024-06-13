@@ -72,5 +72,5 @@ An API reference for the parameters of the `getZodValidatedParams` function.
 
 <!-- Link References -->
 [Zod Object Schema]: https://zod.dev/?id=objects
-[HttpError]: ../http-error
-[zodValidationMiddleware]: ./zod-validation-middleware.md
+[HttpError]: ../../http-error
+[zodValidationMiddleware]: ../zod-validation-middleware.md
