@@ -41,6 +41,8 @@ jobs:
 
         # Add changes to repo
         - name: Add changes to repo
+          env:
+            PAT_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
           run: |
             git config --global user.name "${{ github.actor }}"
             git config --global user.email "${{ github.actor }}@users.noreply.github.com"
@@ -48,6 +50,8 @@ jobs:
 
         # Check if changes were made and commit
         - name: Commit changes if any
+          env:
+            PAT_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
           run: |
             if git diff --cached --quiet; then
               echo "No changes to commit"
