@@ -40,31 +40,13 @@ jobs:
             node .github/helpers/techdocs/update-typescript-types.cjs
 
         # Add changes to repo
-        - name: Add changes to repo
+        - name: Commit changes to repo
           env:
             PAT_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
           run: |
             git config --global user.name "${{ github.actor }}"
             git config --global user.email "${{ github.actor }}@users.noreply.github.com"
             git add .
-
-        # Check if changes were made and commit
-        - name: Commit changes if any
-          env:
-            PAT_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
-          run: |
-            if git diff --cached --quiet; then
-              echo "No changes to commit"
-            else
-              git commit -m "Updating TypeScript types in docs"
-              echo "changes_detected=true" >> $GITHUB_ENV
-            fi
-
-        # Push changes to repo
-        - name: Push changes to repo
-          if: env.changes_detected == 'true'
-          env:
-            PAT_TOKEN: ${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}
-          run: |
+            git commit -m "Updating techdocs types"
             git remote set-url origin https://x-access-token:${{ secrets.GIT_PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}
             git push origin main
