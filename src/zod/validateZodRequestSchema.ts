@@ -33,9 +33,10 @@ export const validateZodRequestSchema = <T>(
           if (e.code === ZodIssueCode.invalid_type) {
             detail.expected = e.expected;
             detail.received = e.received;
+            return `${detail.path.join('.')}: (Expected: ${detail.expected}, Received: ${detail.received}, Message: ${detail.message})`;
           }
 
-          return `${detail.path.join('.')}: (Expected: ${detail.expected}, Received: ${detail.received}, Message: ${detail.message})`;
+          return `${detail.path.join('.')}: (Message: ${detail.message})`;
         })
         .join(', ');
 
