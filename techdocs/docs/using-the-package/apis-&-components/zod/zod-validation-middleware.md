@@ -39,7 +39,7 @@ app.use('/health', healthRouter);
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: zodValidationMiddleware -->
 ```TypeScript
-// placeholder
+const zodValidationMiddleware: (req: Request, res: Response, next: NextFunction) => void;
 ```
 
 <!-- Link References -->

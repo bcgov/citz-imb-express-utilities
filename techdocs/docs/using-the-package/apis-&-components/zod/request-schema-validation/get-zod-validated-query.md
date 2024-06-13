@@ -36,10 +36,16 @@ export const getItems = errorWrapper(async (req: Request, res: Response) => {
 
 ## TypeScript Type
 
+Type of extended Express Request:
+
 <!-- The following code block is auto generated when types in the package change. -->
-<!-- TYPE: getZodValidatedQuery -->
+<!-- TYPE: Request -->
 ```TypeScript
-// placeholder
+interface Request {
+        getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
+        getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
+        getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+    }
 ```
 
 ## Parameters
