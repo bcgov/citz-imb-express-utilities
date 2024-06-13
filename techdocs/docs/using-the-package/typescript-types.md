@@ -49,8 +49,8 @@ declare const HTTP_STATUS_CODES: {
     readonly NOT_EXTENDED: 510;
 };
 
-declare const DEFAULT_CUSTOM_LOG_FUNCTION: ({ method, originalUrl, statusCode, message, }: RouteHandlerErrorProperties) => void;
-declare const DEFAULT_CUSTOM_JSON_RESPONSE: ({ method, originalUrl, statusCode, message, }: RouteHandlerErrorProperties) => {
+declare const DEFAULT_CUSTOM_LOG_FUNCTION: ({ method, originalUrl, message, }: RouteHandlerErrorProperties) => void;
+declare const DEFAULT_CUSTOM_JSON_RESPONSE: ({ method, originalUrl, message, }: RouteHandlerErrorProperties) => {
     method: string;
     originalUrl: string;
     message: string;
