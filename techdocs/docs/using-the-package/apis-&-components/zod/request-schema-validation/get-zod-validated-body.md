@@ -27,7 +27,7 @@ export const getItems = errorWrapper(async (req: Request, res: Response) => {
   const { getZodValidatedBody } = req;
   const body = getZodValidatedBody(bodySchema);
 
-  // Get items from database using query params as a where clause
+  // Get items from database using body params as a where clause
   const items = await getItemsFromDBWhere(body);
 
   res.status(HTTP_STATUS_CODES.OK).json(items);
