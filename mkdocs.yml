@@ -7,6 +7,11 @@ nav:
   - Introduction: index.md
   - Getting Started:
       - Installing the Package: getting-started/installing-the-package.md
+  - Using The Package:
+      - APIs & Components:
+          - Modules:
+              - healthModule: using-the-package/apis-&-components/modules/health.md
+              - configModule: using-the-package/apis-&-components/modules/config.md
   - Major Releases:
       - 1.0.0: major-releases/major-release-1.md
 
