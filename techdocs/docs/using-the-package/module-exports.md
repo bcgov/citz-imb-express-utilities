@@ -7,6 +7,8 @@ import {
   errorWrapper, // Wrapper for route handler (controller) functions to provide error handling.
   HttpError, // Extension of Error class to include http status code.
   HTTP_STATUS_CODES, // Enum of http status codes.
+  healthModule, // Provides a health endpoint.
+  configModule, // Provides a config endpoint.
 } from '@bcgov/citz-imb-express-utilities';
 
 // TypeScript Types:
