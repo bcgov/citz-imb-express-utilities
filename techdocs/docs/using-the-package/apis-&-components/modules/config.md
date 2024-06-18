@@ -65,7 +65,7 @@ export const App = () => {
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: configModule -->
 ```TypeScript
-// placeholder
+const configModule: (app: Application, config: object) => void;
 ```
 
 ## Parameters

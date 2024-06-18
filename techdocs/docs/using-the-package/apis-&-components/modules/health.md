@@ -81,7 +81,7 @@ services:
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: healthModule -->
 ```TypeScript
-// placeholder
+const healthModule: (app: Application) => void;
 ```
 
 ## Parameters

@@ -9,8 +9,12 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 
 <!-- TYPESCRIPT TYPES -->
 ```TypeScript
-import { Request, Response, NextFunction } from 'express';
+/// <reference types="qs" />
+import * as express from 'express';
+import { Request, Response, NextFunction, Application } from 'express';
 import { ZodSchema, z } from 'zod';
+import * as qs from 'qs';
+import * as express_serve_static_core from 'express-serve-static-core';
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -168,6 +172,9 @@ declare class HttpError extends Error {
     constructor(statusCode: HttpStatusCode | number, message: string);
 }
 
+declare const healthModule: (app: Application) => void;
+declare const configModule: (app: Application, config: object) => void;
+
 declare const serverStartupLogs: (port?: number | string) => void;
 
 declare const validUser: {
@@ -248,5 +255,11 @@ declare const blogPostSchema: z.ZodObject<{
 
 declare const getCurrentDateTime: () => GetCurrentDateTime;
 
-export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type UTCComponents, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, getCurrentDateTime, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, serverStartupLogs, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
+declare const getConfig: (config: object) => (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
+
+declare const configRouter: (config: object) => express_serve_static_core.Router;
+
+declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
+
+export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type UTCComponents, type ZodValidationErrorDetail, blogPostSchema, booleanParam, configModule, configRouter, errorWrapper, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, serverStartupLogs, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
 ```
