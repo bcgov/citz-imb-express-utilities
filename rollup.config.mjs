@@ -13,7 +13,7 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ['express'],
+    external: ['express', 'zod'],
     plugins: [
       resolve(),
       commonjs(),
