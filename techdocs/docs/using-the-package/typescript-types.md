@@ -9,7 +9,9 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 
 <!-- TYPESCRIPT TYPES -->
 ```TypeScript
+/// <reference types="cookie-parser" />
 import { Request, Response, NextFunction } from 'express';
+import { z } from 'zod';
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -71,10 +73,22 @@ type ErrorWrapperOptions = {
 
 declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
+declare const stringParam: (param: string, optional?: boolean) => z.ZodString | z.ZodOptional<z.ZodString>;
+
+declare const booleanParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, boolean | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, boolean, string>;
+
+declare const integerParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
+
+declare const numberParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
+
+declare const refineAtLeastOneNonEmpty: (keys: string[]) => (data: Record<string, unknown>) => boolean;
+
+declare const transformRemoveEmpty: <T extends Record<string, unknown>>(obj: T) => Partial<T>;
+
 declare class HttpError extends Error {
     statusCode: HttpStatusCode | number;
     constructor(statusCode: HttpStatusCode | number, message: string);
 }
 
-export { DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, errorWrapper };
+export { DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, booleanParam, errorWrapper, integerParam, numberParam, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty };
 ```

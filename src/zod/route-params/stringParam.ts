@@ -11,6 +11,8 @@ import { z } from 'zod';
  *   name: stringParam('name'),
  * });
  *
+ * // The following should be inside a route handler (controller) function:
+ *
  * // Validate the query parameters
  * const result = querySchema.safeParse(req.query);
  *

@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { transformNumberParam } from '@/zod';
+import { numberParam } from '@/zod';
 
-// Test suite for transformNumberParam
-describe('transformNumberParam', () => {
+// Test suite for numberParam
+describe('numberParam', () => {
   // Test case: should validate and transform a required number string
   it('should validate and transform a required number string', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum'),
+      sum: numberParam('sum'),
     });
 
     const result = schema.safeParse({ sum: '42.5' });
@@ -17,7 +17,7 @@ describe('transformNumberParam', () => {
   // Test case: should invalidate a non-numeric string for a required field
   it('should invalidate a non-numeric string for a required field', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum'),
+      sum: numberParam('sum'),
     });
 
     const result = schema.safeParse({ sum: 'abc' });
@@ -28,7 +28,7 @@ describe('transformNumberParam', () => {
   // Test case: should invalidate an empty string for a required field
   it('should invalidate an empty string for a required field', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum'),
+      sum: numberParam('sum'),
     });
 
     const result = schema.safeParse({ sum: '' });
@@ -39,7 +39,7 @@ describe('transformNumberParam', () => {
   // Test case: should validate and transform an optional number string
   it('should validate and transform an optional number string', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum', true),
+      sum: numberParam('sum', true),
     });
 
     const result = schema.safeParse({ sum: '42.5' });
@@ -50,7 +50,7 @@ describe('transformNumberParam', () => {
   // Test case: should validate if the optional number is not provided
   it('should validate if the optional number is not provided', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum', true),
+      sum: numberParam('sum', true),
     });
 
     const result = schema.safeParse({});
@@ -61,7 +61,7 @@ describe('transformNumberParam', () => {
   // Test case: should invalidate a non-numeric string for an optional field
   it('should invalidate a non-numeric string for an optional field', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum', true),
+      sum: numberParam('sum', true),
     });
 
     const result = schema.safeParse({ sum: 'abc' });
@@ -72,7 +72,7 @@ describe('transformNumberParam', () => {
   // Test case: should invalidate an empty string for an optional field
   it('should invalidate an empty string for an optional field', () => {
     const schema = z.object({
-      sum: transformNumberParam('sum', true),
+      sum: numberParam('sum', true),
     });
 
     const result = schema.safeParse({ sum: '' });

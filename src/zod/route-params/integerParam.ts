@@ -8,8 +8,10 @@ import { z } from 'zod';
  * @example
  * // Define a Zod schema for the query parameters
  * const querySchema = z.object({
- *   count: transformIntegerParam('count'),
+ *   count: integerParam('count'),
  * });
+ *
+ * // The following should be inside a route handler (controller) function:
  *
  * // Validate the query parameters
  * const result = querySchema.safeParse(req.query);
@@ -22,7 +24,7 @@ import { z } from 'zod';
  * // Access the transformed integer value
  * const { count } = result.data;
  */
-export const transformIntegerParam = (param: string, optional = false) =>
+export const integerParam = (param: string, optional = false) =>
   optional
     ? z
         .string()

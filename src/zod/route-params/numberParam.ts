@@ -8,8 +8,10 @@ import { z } from 'zod';
  * @example
  * // Define a Zod schema for the query parameters
  * const querySchema = z.object({
- *   sum: transformNumberParam('sum'),
+ *   sum: numberParam('sum'),
  * });
+ *
+ * // The following should be inside a route handler (controller) function:
  *
  * // Validate the query parameters
  * const result = querySchema.safeParse(req.query);
@@ -22,7 +24,7 @@ import { z } from 'zod';
  * // Access the transformed boolean value
  * const { sum } = result.data;
  */
-export const transformNumberParam = (param: string, optional = false) =>
+export const numberParam = (param: string, optional = false) =>
   optional
     ? z
         .string()

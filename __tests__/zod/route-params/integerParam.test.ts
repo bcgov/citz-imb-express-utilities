@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { transformIntegerParam } from '@/zod';
+import { integerParam } from '@/zod';
 
-// Test suite for transformIntegerParam
-describe('transformIntegerParam', () => {
+// Test suite for integerParam
+describe('integerParam', () => {
   // Test case: should validate and transform a required integer string
   it('should validate and transform a required integer string', () => {
     const schema = z.object({
-      count: transformIntegerParam('count'),
+      count: integerParam('count'),
     });
 
     const result = schema.safeParse({ count: '42' });
@@ -17,7 +17,7 @@ describe('transformIntegerParam', () => {
   // Test case: should invalidate a non-integer string for a required field
   it('should invalidate a non-integer string for a required field', () => {
     const schema = z.object({
-      count: transformIntegerParam('count'),
+      count: integerParam('count'),
     });
 
     const result = schema.safeParse({ count: '42.5' });
@@ -28,7 +28,7 @@ describe('transformIntegerParam', () => {
   // Test case: should invalidate a non-numeric string for a required field
   it('should invalidate a non-numeric string for a required field', () => {
     const schema = z.object({
-      count: transformIntegerParam('count'),
+      count: integerParam('count'),
     });
 
     const result = schema.safeParse({ count: 'abc' });
@@ -39,7 +39,7 @@ describe('transformIntegerParam', () => {
   // Test case: should validate and transform an optional integer string
   it('should validate and transform an optional integer string', () => {
     const schema = z.object({
-      count: transformIntegerParam('count', true),
+      count: integerParam('count', true),
     });
 
     const result = schema.safeParse({ count: '42' });
@@ -50,7 +50,7 @@ describe('transformIntegerParam', () => {
   // Test case: should validate if the optional integer is not provided
   it('should validate if the optional integer is not provided', () => {
     const schema = z.object({
-      count: transformIntegerParam('count', true),
+      count: integerParam('count', true),
     });
 
     const result = schema.safeParse({});
@@ -61,7 +61,7 @@ describe('transformIntegerParam', () => {
   // Test case: should invalidate a non-integer string for an optional field
   it('should invalidate a non-integer string for an optional field', () => {
     const schema = z.object({
-      count: transformIntegerParam('count', true),
+      count: integerParam('count', true),
     });
 
     const result = schema.safeParse({ count: '42.5' });
@@ -72,7 +72,7 @@ describe('transformIntegerParam', () => {
   // Test case: should invalidate a non-numeric string for an optional field
   it('should invalidate a non-numeric string for an optional field', () => {
     const schema = z.object({
-      count: transformIntegerParam('count', true),
+      count: integerParam('count', true),
     });
 
     const result = schema.safeParse({ count: 'abc' });
