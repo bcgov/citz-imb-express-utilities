@@ -9,6 +9,9 @@ nav:
       - Installing the Package: getting-started/installing-the-package.md
   - Using The Package:
       - APIs & Components:
+          - Modules:
+              - healthModule: using-the-package/apis-&-components/modules/health.md
+              - configModule: using-the-package/apis-&-components/modules/config.md
           - errorWrapper: using-the-package/apis-&-components/error-wrapper.md
           - Zod:
               - Middleware: using-the-package/apis-&-components/zod/zod-validation-middleware.md
