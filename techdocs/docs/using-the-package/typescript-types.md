@@ -115,6 +115,22 @@ type ErrorWrapperOptions = {
     customLogFunction?: (props: RouteHandlerErrorProperties) => void;
     customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
 };
+type PacificTimeZone = 'PDT' | 'PST';
+type UTCComponents = {
+    utcYear: number;
+    utcMonth: number;
+    utcDate: number;
+    utcHours: number;
+    utcMinutes: number;
+    utcSeconds: number;
+};
+type GetCurrentDateTime = {
+    formattedDateUTC: string;
+    formattedTimeUTC: string;
+    formattedDatePacific: string;
+    formattedTimePacific: string;
+    pacificTimeZone: PacificTimeZone;
+};
 type ZodValidationErrorDetail = {
     path: (string | number)[];
     expected: string;
@@ -151,6 +167,8 @@ declare class HttpError extends Error {
     statusCode: HttpStatusCode | number;
     constructor(statusCode: HttpStatusCode | number, message: string);
 }
+
+declare const serverStartupLogs: (port?: number | string) => void;
 
 declare const validUser: {
     username: string;
@@ -228,5 +246,7 @@ declare const blogPostSchema: z.ZodObject<{
     tags?: string[] | undefined;
 }>;
 
-export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
+declare const getCurrentDateTime: () => GetCurrentDateTime;
+
+export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type UTCComponents, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, getCurrentDateTime, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, serverStartupLogs, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
 ```
