@@ -23,6 +23,25 @@ export type ErrorWrapperOptions = {
   customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
 };
 
+export type PacificTimeZone = 'PDT' | 'PST';
+
+export type UTCComponents = {
+  utcYear: number;
+  utcMonth: number;
+  utcDate: number;
+  utcHours: number;
+  utcMinutes: number;
+  utcSeconds: number;
+};
+
+export type GetCurrentDateTime = {
+  formattedDateUTC: string; // year-month-day
+  formattedTimeUTC: string; // hours:minutes:seconds
+  formattedDatePacific: string; // year-month-day
+  formattedTimePacific: string; // hours:minutes:seconds
+  pacificTimeZone: PacificTimeZone;
+};
+
 export type ZodValidationErrorDetail = {
   path: (string | number)[];
   expected: string;
