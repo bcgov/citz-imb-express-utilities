@@ -9,9 +9,8 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 
 <!-- TYPESCRIPT TYPES -->
 ```TypeScript
-/// <reference types="cookie-parser" />
 import { Request, Response, NextFunction } from 'express';
-import { z } from 'zod';
+import { ZodSchema, z } from 'zod';
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -70,6 +69,19 @@ type ErrorWrapperOptions = {
     customLogFunction?: (props: RouteHandlerErrorProperties) => void;
     customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
 };
+type ZodValidationErrorDetail = {
+    path: (string | number)[];
+    expected: string;
+    received: string;
+    message: string;
+};
+declare module 'express-serve-static-core' {
+    interface Request {
+        getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
+        getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
+        getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+    }
+}
 
 declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -85,10 +97,90 @@ declare const refineAtLeastOneNonEmpty: (keys: string[]) => (data: Record<string
 
 declare const transformRemoveEmpty: <T extends Record<string, unknown>>(obj: T) => Partial<T>;
 
+declare const validateZodRequestSchema: <T>(obj: Record<string, unknown>, schema: z.ZodSchema<T>, errorMsgPrefix: string) => T;
+
+declare const zodValidationMiddleware: (req: Request, res: Response, next: NextFunction) => void;
+
 declare class HttpError extends Error {
     statusCode: HttpStatusCode | number;
     constructor(statusCode: HttpStatusCode | number, message: string);
 }
 
-export { DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, booleanParam, errorWrapper, integerParam, numberParam, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty };
+declare const validUser: {
+    username: string;
+    email: string;
+    password: string;
+};
+declare const invalidUser: {
+    username: string;
+    email: string;
+    password: string;
+};
+declare const validProduct: {
+    name: string;
+    price: number;
+    inStock: boolean;
+};
+declare const invalidProduct: {
+    name: string;
+    price: number;
+    inStock: string;
+};
+declare const validBlogPost: {
+    title: string;
+    content: string;
+    published: boolean;
+    tags: string[];
+};
+declare const invalidBlogPost: {
+    title: string;
+    content: string;
+    published: string;
+    tags: string;
+};
+
+declare const userSchema: z.ZodObject<{
+    username: z.ZodString;
+    email: z.ZodString;
+    password: z.ZodString;
+}, "strip", z.ZodTypeAny, {
+    username: string;
+    email: string;
+    password: string;
+}, {
+    username: string;
+    email: string;
+    password: string;
+}>;
+declare const productSchema: z.ZodObject<{
+    name: z.ZodString;
+    price: z.ZodNumber;
+    inStock: z.ZodBoolean;
+}, "strip", z.ZodTypeAny, {
+    name: string;
+    price: number;
+    inStock: boolean;
+}, {
+    name: string;
+    price: number;
+    inStock: boolean;
+}>;
+declare const blogPostSchema: z.ZodObject<{
+    title: z.ZodString;
+    content: z.ZodString;
+    published: z.ZodBoolean;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+}, "strip", z.ZodTypeAny, {
+    title: string;
+    content: string;
+    published: boolean;
+    tags?: string[] | undefined;
+}, {
+    title: string;
+    content: string;
+    published: boolean;
+    tags?: string[] | undefined;
+}>;
+
+export { DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
 ```
