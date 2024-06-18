@@ -41,7 +41,7 @@ export type GetCurrentDateTime = {
   formattedTimePacific: string; // hours:minutes:seconds
   pacificTimeZone: PacificTimeZone;
 };
-=======
+
 export type ZodValidationErrorDetail = {
   path: (string | number)[];
   expected: string;
