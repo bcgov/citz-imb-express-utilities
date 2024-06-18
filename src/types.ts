@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
 import { HTTP_STATUS_CODES } from './constants';
+import { ZodSchema } from 'zod';
 
 export type ExpressRouteHandler = (
   req: Request,
@@ -21,3 +22,18 @@ export type ErrorWrapperOptions = {
   customLogFunction?: (props: RouteHandlerErrorProperties) => void;
   customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
 };
+
+export type ZodValidationErrorDetail = {
+  path: (string | number)[];
+  expected: string;
+  received: string;
+  message: string;
+};
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
+    getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
+    getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+  }
+}
