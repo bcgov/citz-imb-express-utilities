@@ -57,6 +57,52 @@ declare const DEFAULT_CUSTOM_JSON_RESPONSE: ({ method, originalUrl, message, }: 
     message: string;
 };
 
+declare const ANSI_CODES: {
+    FOREGROUND: {
+        BLACK: string;
+        RED: string;
+        GREEN: string;
+        GOLD: string;
+        BLUE: string;
+        PURPLE: string;
+        CYAN: string;
+        WHITE: string;
+        GREY: string;
+        PINK: string;
+        LIME: string;
+        YELLOW: string;
+        LIGHT_BLUE: string;
+        MAGENTA: string;
+        AQUA: string;
+    };
+    BACKGROUND: {
+        BLACK: string;
+        RED: string;
+        GREEN: string;
+        GOLD: string;
+        BLUE: string;
+        PURPLE: string;
+        CYAN: string;
+        WHITE: string;
+        GREY: string;
+        PINK: string;
+        LIME: string;
+        YELLOW: string;
+        LIGHT_BLUE: string;
+        MAGENTA: string;
+        AQUA: string;
+    };
+    FORMATTING: {
+        RESET: string;
+        BRIGHT: string;
+        DIM: string;
+        UNDERSCORE: string;
+        REVERSE: string;
+        ITALIC: string;
+        STRIKETHROUGH: string;
+    };
+};
+
 type ExpressRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void | Response<unknown> | undefined>;
 type HttpStatusCode = (typeof HTTP_STATUS_CODES)[keyof typeof HTTP_STATUS_CODES];
 type RouteHandlerErrorProperties = {
@@ -182,5 +228,5 @@ declare const blogPostSchema: z.ZodObject<{
     tags?: string[] | undefined;
 }>;
 
-export { DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
+export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type RouteHandlerErrorProperties, type ZodValidationErrorDetail, blogPostSchema, booleanParam, errorWrapper, integerParam, invalidBlogPost, invalidProduct, invalidUser, numberParam, productSchema, refineAtLeastOneNonEmpty, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
 ```
