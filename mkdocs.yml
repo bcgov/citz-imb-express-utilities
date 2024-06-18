@@ -11,15 +11,19 @@ nav:
       - APIs & Components:
           - errorWrapper: using-the-package/apis-&-components/error-wrapper.md
           - Zod:
-              - .refine Functions:
-                  - refineAtLeastOneNonEmpty: using-the-package/apis-&-components/zod/refine-functions/at-least-one-non-empty.md
-              - .transform Functions:
-                  - transformRemoveEmpty: using-the-package/apis-&-components/zod/transform-functions/remove-empty.md
-              - Path & Query Params:
+              - Middleware: using-the-package/apis-&-components/zod/zod-validation-middleware.md
+              - Param Validation:
+                  - Req Params: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-params.md
+                  - Req Query: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-query.md
+                  - Req Body: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-body.md
                   - stringParam: using-the-package/apis-&-components/zod/route-params/string-param.md
                   - booleanParam: using-the-package/apis-&-components/zod/route-params/boolean-param.md
                   - numberParam: using-the-package/apis-&-components/zod/route-params/number-param.md
                   - integerParam: using-the-package/apis-&-components/zod/route-params/integer-param.md
+              - .refine:
+                  - refineAtLeastOneNonEmpty: using-the-package/apis-&-components/zod/refine-functions/at-least-one-non-empty.md
+              - .transform:
+                  - transformRemoveEmpty: using-the-package/apis-&-components/zod/transform-functions/remove-empty.md
       - Module Exports: using-the-package/module-exports.md
       - TypeScript Types: using-the-package/typescript-types.md
   - Major Releases:

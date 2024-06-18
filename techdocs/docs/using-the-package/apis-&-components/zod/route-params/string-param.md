@@ -49,7 +49,7 @@ const stringParam: (param: string, optional?: boolean) => z.ZodString | z.ZodOpt
 An API reference for the parameters of the `stringParam` function.
 
 !!! note "Note"
-    The Name column starting with `*` means the prop is required.
+    The Name column starting with `*` means the parameter is required.
 
 <table>
   <!-- Table columns -->
