@@ -5,7 +5,7 @@ The `req.getZodValidatedParams` function takes in [Zod Object Schema] as input a
 The difference is that the path params will be validated against the schema and transformed if the schema involves transforming the data. If an error is caught in the validation, an [HttpError] will be thrown.
 
 !!! warning "Attention"
-    The use of this function requires the use of the [zodValidationMiddleware]. You can access it as part of the request object on Express route handlers (controllers).
+    The use of this function requires the use of the [expressUtilitiesMiddleware]. You can access it as part of the request object on Express route handlers (controllers).
 
 ## Usage
 
@@ -79,4 +79,4 @@ An API reference for the parameters of the `getZodValidatedParams` function.
 <!-- Link References -->
 [Zod Object Schema]: https://zod.dev/?id=objects
 [HttpError]: ../../../http-error
-[zodValidationMiddleware]: ../zod-validation-middleware.md
+[expressUtilitiesMiddleware]: ../../../middleware
