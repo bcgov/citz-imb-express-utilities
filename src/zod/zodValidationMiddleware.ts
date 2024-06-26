@@ -1,12 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request } from 'express';
 import { validateZodRequestSchema } from './validateZodRequestSchema';
 import { ZodSchema } from 'zod';
 
 /**
- * Express middleware that adds zod validation functions onto the request object.
- * Place this middleware before your routes are defined to give them access to these functions.
+ * Express middleware functions that add zod validation functions onto the request object.
+ * Used as part of the Express Utilities middleware.
  */
-export const zodValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const zodValidationMiddlewareFunctions = (req: Request) => {
   // Params.
   req.getZodValidatedParams = (schema: ZodSchema<unknown>): unknown =>
     validateZodRequestSchema(req.params, schema, 'Request is malformed. Invalid path parameters: ');
@@ -18,6 +18,4 @@ export const zodValidationMiddleware = (req: Request, res: Response, next: NextF
   // Request body.
   req.getZodValidatedBody = (schema: ZodSchema<unknown>): unknown =>
     validateZodRequestSchema(req.body, schema, 'Request is malformed. Invalid request body: ');
-
-  next();
 };

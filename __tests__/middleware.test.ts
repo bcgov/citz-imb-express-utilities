@@ -1,14 +1,17 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import request from 'supertest';
-import { numberParam, zodValidationMiddleware } from '@/zod';
+import { numberParam } from '@/zod';
 import { HTTP_STATUS_CODES } from '@/constants';
 import { HttpError } from '@/classes';
+import { getCurrentDateTime, elapsedTimeMiddlewareFunction } from '@/helpers';
+import { StandardResponseInput } from '@/types';
+import { expressUtilitiesMiddleware } from '@/middleware';
 
 // Set up the Express app with middleware
 const app = express();
 app.use(express.json());
-app.use(zodValidationMiddleware);
+app.use(expressUtilitiesMiddleware);
 
 app.get('/params/:id', (req: Request, res: Response) => {
   const paramsSchema = z.object({
@@ -56,6 +59,21 @@ app.post('/body', (req: Request, res: Response) => {
     statusCode = (error as HttpError).statusCode;
   }
   res.status(statusCode).json(responseBody);
+});
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  elapsedTimeMiddlewareFunction(res);
+  next();
+});
+
+app.get('/elapsed-time', (req: Request, res: Response) => {
+  res.json({ elapsedTime: res.getElapsedTimeInMs() });
+});
+
+app.get('/standard-response', (req: Request, res: Response) => {
+  const input: StandardResponseInput = { success: true, data: { key: 'value' } };
+  const response = res.getStandardResponse(input);
+  res.status(200).json(response);
 });
 
 // Integration tests using supertest
@@ -108,6 +126,28 @@ describe('zodValidationMiddleware Integration Tests', () => {
     expect(response.body).toEqual({
       message:
         'Request is malformed. Invalid request body: username: (Expected: string, Received: number, Message: Expected string, received number)',
+    });
+  });
+
+  // Test case: Elapsed time middleware
+  it('should return the elapsed time in milliseconds', async () => {
+    const response = await request(app).get('/elapsed-time');
+    expect(response.status).toBe(HTTP_STATUS_CODES.OK);
+    expect(Number(response.body.elapsedTime)).toBeGreaterThan(0);
+  });
+
+  // Test case: Standard response middleware
+  it('should return a standardized response', async () => {
+    const response = await request(app).get('/standard-response');
+    expect(response.status).toBe(HTTP_STATUS_CODES.OK);
+    const currentDateTime = getCurrentDateTime();
+    expect(response.body).toEqual({
+      success: true,
+      data: { key: 'value' },
+      message: '',
+      responseDateUTC: currentDateTime.formattedDateUTC,
+      responseTimeUTC: currentDateTime.formattedTimeUTC,
+      responseTimeInMs: expect.any(String),
     });
   });
 });
