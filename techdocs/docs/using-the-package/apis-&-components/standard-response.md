@@ -38,7 +38,10 @@ export const getItem = errorWrapper(async (req: Request, res: Response) => {
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: Response -->
 ```TypeScript
-// placeholder
+interface Response {
+        getElapsedTimeInMs: () => string;
+        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+    }
 ```
 
 Type of `StandardResponseInput`:
@@ -46,7 +49,11 @@ Type of `StandardResponseInput`:
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: StandardResponseInput -->
 ```TypeScript
-// placeholder
+type StandardResponseInput = {
+    success: boolean;
+    data: object;
+    message?: string;
+}
 ```
 
 Type of `StandardResponse`:
@@ -54,7 +61,14 @@ Type of `StandardResponse`:
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: StandardResponse -->
 ```TypeScript
-// placeholder
+type StandardResponse = {
+    success: boolean;
+    data: object;
+    message: string;
+    responseDateUTC: string;
+    responseTimeUTC: string;
+    responseTimeInMs: string;
+}
 ```
 
 ## Parameters

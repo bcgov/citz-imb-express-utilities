@@ -141,11 +141,28 @@ type ZodValidationErrorDetail = {
     received: string;
     message: string;
 };
+type StandardResponseInput = {
+    success: boolean;
+    data: object;
+    message?: string;
+};
+type StandardResponse = {
+    success: boolean;
+    data: object;
+    message: string;
+    responseDateUTC: string;
+    responseTimeUTC: string;
+    responseTimeInMs: string;
+};
 declare module 'express-serve-static-core' {
     interface Request {
         getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
         getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
         getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+    }
+    interface Response {
+        getElapsedTimeInMs: () => string;
+        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
     }
 }
 
@@ -165,7 +182,7 @@ declare const transformRemoveEmpty: <T extends Record<string, unknown>>(obj: T) 
 
 declare const validateZodRequestSchema: <T>(obj: Record<string, unknown>, schema: z.ZodSchema<T>, errorMsgPrefix: string) => T;
 
-declare const zodValidationMiddleware: (req: Request, res: Response, next: NextFunction) => void;
+declare const zodValidationMiddlewareFunctions: (req: Request) => void;
 
 declare class HttpError extends Error {
     statusCode: HttpStatusCode | number;
@@ -176,6 +193,10 @@ declare const healthModule: (app: Application) => void;
 declare const configModule: (app: Application, config: object) => void;
 
 declare const serverStartupLogs: (port?: number | string) => void;
+
+declare const expressUtilitiesMiddleware: (req: Request, res: Response, next: NextFunction) => void;
+
+declare const standardResponse: (dataInput: StandardResponseInput, req: Request, res: Response) => StandardResponse;
 
 declare const validUser: {
     username: string;
@@ -255,11 +276,13 @@ declare const blogPostSchema: z.ZodObject<{
 
 declare const getCurrentDateTime: () => GetCurrentDateTime;
 
+declare const elapsedTimeMiddlewareFunction: (res: Response) => void;
+
 declare const getConfig: (config: object) => (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
 
 declare const configRouter: (config: object) => express_serve_static_core.Router;
 
 declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
 
-export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type UTCComponents, type ZodValidationErrorDetail, blogPostSchema, booleanParam, configModule, configRouter, errorWrapper, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, serverStartupLogs, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddleware };
+export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type StandardResponse, type StandardResponseInput, type UTCComponents, type ZodValidationErrorDetail, blogPostSchema, booleanParam, configModule, configRouter, elapsedTimeMiddlewareFunction, errorWrapper, expressUtilitiesMiddleware, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, serverStartupLogs, standardResponse, stringParam, transformRemoveEmpty, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddlewareFunctions };
 ```

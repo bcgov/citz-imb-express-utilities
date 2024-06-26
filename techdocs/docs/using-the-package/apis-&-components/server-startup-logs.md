@@ -41,7 +41,7 @@ app.listen(PORT, () => {
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: serverStartupLogs -->
 ```TypeScript
-// placeholder
+const serverStartupLogs: (port?: number | string) => void;
 ```
 
 ## Parameters
