@@ -1,10 +1,10 @@
-# getStandardResponse
+# res.getStandardResponse
 
-The `getStandardResponse` function is used to standardize the JSON response structure for responses.
+The `res.getStandardResponse` function is used to standardize the JSON response structure for responses.
 
 ## Usage
 
-A basic example of using the `getStandardResponse` function.
+A basic example of using the `res.getStandardResponse` function.
 
 ```JavaScript
 import { z } from 'zod';

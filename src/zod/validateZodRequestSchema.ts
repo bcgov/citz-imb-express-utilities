@@ -11,11 +11,11 @@ import { ZodValidationErrorDetail } from '../types';
  * @returns {T} - The validated and parsed object.
  * @throws {HttpError} - Throws an HttpError with detailed validation error messages if validation fails.
  */
-export const validateZodRequestSchema = <T>(
+export const validateZodRequestSchema = <TSchema>(
   obj: Record<string, unknown>,
-  schema: z.ZodSchema<T>,
+  schema: z.ZodSchema<TSchema>,
   errorMsgPrefix: string,
-): T => {
+): TSchema => {
   try {
     // Use Zod schema to parse and validate the query parameters
     return schema.parse(obj);
