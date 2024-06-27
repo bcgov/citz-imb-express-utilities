@@ -1,10 +1,10 @@
-# standardResponse
+# getStandardResponse
 
-The `standardResponse` function is used to standardize the JSON response structure for responses.
+The `getStandardResponse` function is used to standardize the JSON response structure for responses.
 
 ## Usage
 
-A basic example of using the `standardResponse` function.
+A basic example of using the `getStandardResponse` function.
 
 ```JavaScript
 import { z } from 'zod';
@@ -19,17 +19,14 @@ const paramSchema = z.object({
 // Route handler (controller)
 export const getItem = errorWrapper(async (req: Request, res: Response) => {
   const { getZodValidatedParams } = req;
-  const { standardResponse } = res;
+  const { getStandardResponse } = res;
   const pathParams = getZodValidatedParams(paramSchema);
 
   // Get item from database using path params as a where clause
   const item = await getItemFromDBWhere(pathParams);
 
-  const response = {
-    success: true,
-    data: items,
-  }
-  res.status(HTTP_STATUS_CODES.OK).json(standardResponse(response));
+  const response = { data: items };
+  res.status(HTTP_STATUS_CODES.OK).json(getStandardResponse(response));
 });
 ```
 
@@ -50,7 +47,7 @@ Type of `StandardResponseInput`:
 <!-- TYPE: StandardResponseInput -->
 ```TypeScript
 type StandardResponseInput = {
-    success: boolean;
+    success?: boolean;
     data: object;
     message?: string;
 }
@@ -73,7 +70,7 @@ type StandardResponse = {
 
 ## Parameters
 
-An API reference for the parameters of the `standardResponse` function.
+An API reference for the parameters of the `getStandardResponse` function.
 
 !!! note "Note"
     The Name column starting with `*` means the prop is required.
@@ -94,7 +91,7 @@ An API reference for the parameters of the `standardResponse` function.
     <tr>
       <td>data</td>
       <td>StandardResponseInput</td>
-      <td>-</td>
+      <td>{ success: true, data: undefined, message: undefined }</td>
       <td>The data to send in the response.</td>
     </tr>
   </tbody>

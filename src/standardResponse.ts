@@ -13,7 +13,7 @@ export const standardResponse = (
   req: Request,
   res: Response,
 ): StandardResponse => {
-  const { success, data, message } = dataInput;
+  const { success = true, data, message } = dataInput;
   const dateTime = getCurrentDateTime();
 
   return {

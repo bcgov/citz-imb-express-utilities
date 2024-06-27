@@ -50,7 +50,7 @@ export type ZodValidationErrorDetail = {
 };
 
 export type StandardResponseInput = {
-  success: boolean;
+  success?: boolean;
   data: object;
   message?: string;
 };
