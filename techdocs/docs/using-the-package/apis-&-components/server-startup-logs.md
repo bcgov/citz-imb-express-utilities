@@ -4,7 +4,7 @@ The `serverStartupLogs` function is used on server start up to log useful inform
 
 Here is an example of what the logs will look like:
 
-![server-startup-logs](images/server_startup_logs.PNG)
+![server-startup-logs](../../images/server_startup_logs.PNG)
 
 ## Import
 

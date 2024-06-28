@@ -42,9 +42,9 @@ Type of extended Express Request:
 <!-- TYPE: Request -->
 ```TypeScript
 interface Request {
-        getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
-        getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
-        getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+        getZodValidatedParams: (schema: ZodSchema<TSchema>) => TSchema;
+        getZodValidatedQuery: (schema: ZodSchema<TSchema>) => TSchema;
+        getZodValidatedBody: (schema: ZodSchema<TSchema>) => TSchema;
     }
 ```
 
