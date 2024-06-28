@@ -15,10 +15,10 @@ export const validateZodRequestSchema = (
   obj: Record<string, unknown>,
   schema: ZodSchema<unknown>,
   errorMsgPrefix: string,
-): unknown => {
+): object => {
   try {
     // Use Zod schema to parse and validate the query parameters
-    return schema.parse(obj);
+    return schema.parse(obj) as object;
   } catch (error) {
     if (error instanceof ZodError) {
       const formattedErrors = error.errors

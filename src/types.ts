@@ -66,9 +66,9 @@ export type StandardResponse = {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    getZodValidatedParams: (schema: ZodSchema<unknown>) => unknown;
-    getZodValidatedQuery: (schema: ZodSchema<unknown>) => unknown;
-    getZodValidatedBody: (schema: ZodSchema<unknown>) => unknown;
+    getZodValidatedParams: (schema: ZodSchema<unknown>) => object;
+    getZodValidatedQuery: (schema: ZodSchema<unknown>) => object;
+    getZodValidatedBody: (schema: ZodSchema<unknown>) => object;
   }
   interface Response {
     getElapsedTimeInMs: () => string;
