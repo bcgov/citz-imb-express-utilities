@@ -8,14 +8,14 @@ import { ZodSchema } from 'zod';
  */
 export const zodValidationMiddlewareFunctions = (req: Request) => {
   // Params.
-  req.getZodValidatedParams = <TSchema>(schema: ZodSchema<TSchema>): TSchema =>
+  req.getZodValidatedParams = (schema: ZodSchema<unknown>): unknown =>
     validateZodRequestSchema(req.params, schema, 'Request is malformed. Invalid path parameters: ');
 
   // Query.
-  req.getZodValidatedQuery = <TSchema>(schema: ZodSchema<TSchema>): TSchema =>
+  req.getZodValidatedQuery = (schema: ZodSchema<unknown>): unknown =>
     validateZodRequestSchema(req.query, schema, 'Request is malformed. Invalid query parameters: ');
 
   // Request body.
-  req.getZodValidatedBody = <TSchema>(schema: ZodSchema<TSchema>): TSchema =>
+  req.getZodValidatedBody = (schema: ZodSchema<unknown>): unknown =>
     validateZodRequestSchema(req.body, schema, 'Request is malformed. Invalid request body: ');
 };
