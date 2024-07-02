@@ -1,4 +1,4 @@
-import { ZodError, z, ZodIssueCode } from 'zod';
+import { ZodError, ZodSchema, ZodIssueCode } from 'zod';
 import { HttpError } from '../classes';
 import { HTTP_STATUS_CODES } from '../constants';
 import { ZodValidationErrorDetail } from '../types';
@@ -6,16 +6,16 @@ import { ZodValidationErrorDetail } from '../types';
 /**
  * Validates an object against a Zod schema and throws an 400 HttpError if validation fails.
  * @param {Record<string, unknown>} obj - The object to be validated.
- * @param {z.ZodSchema<T>} schema - The Zod schema to validate against.
+ * @param {z.ZodSchema<unknown>} schema - The Zod schema to validate against.
  * @param {string} errorMsgPrefix - A prefix to be added to the error message.
- * @returns {T} - The validated and parsed object.
+ * @returns {unknown} - The validated and parsed object.
  * @throws {HttpError} - Throws an HttpError with detailed validation error messages if validation fails.
  */
-export const validateZodRequestSchema = <T>(
+export const validateZodRequestSchema = (
   obj: Record<string, unknown>,
-  schema: z.ZodSchema<T>,
+  schema: ZodSchema<unknown>,
   errorMsgPrefix: string,
-): T => {
+): unknown => {
   try {
     // Use Zod schema to parse and validate the query parameters
     return schema.parse(obj);
