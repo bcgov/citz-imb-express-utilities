@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
 import { HTTP_STATUS_CODES } from './constants';
@@ -66,9 +67,9 @@ export type StandardResponse = {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    getZodValidatedParams: (schema: ZodSchema<unknown>) => object;
-    getZodValidatedQuery: (schema: ZodSchema<unknown>) => object;
-    getZodValidatedBody: (schema: ZodSchema<unknown>) => object;
+    getZodValidatedParams: (schema: ZodSchema<unknown>) => any;
+    getZodValidatedQuery: (schema: ZodSchema<unknown>) => any;
+    getZodValidatedBody: (schema: ZodSchema<unknown>) => any;
   }
   interface Response {
     getElapsedTimeInMs: () => string;
