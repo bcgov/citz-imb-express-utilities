@@ -31,13 +31,13 @@ export const serverStartupLogs = (port?: number | string) => {
   );
 
   // Memory usage
-  console.info(`${FOREGROUND.YELLOW}[MEMORY]${FORMATTING.RESET} Current memory usage:`);
+  console.info(`${FOREGROUND.YELLOW}[MEMORY]${FORMATTING.RESET} Startup memory usage:`);
   console.log(`  RSS: ${formatBytes(MEMORY_USAGE.rss)}`);
   console.log(`  Heap Total: ${formatBytes(MEMORY_USAGE.heapTotal)}`);
   console.log(`  Heap Used: ${formatBytes(MEMORY_USAGE.heapUsed)}`);
 
   // CPU usage
-  console.info(`${FOREGROUND.YELLOW}[CPU]${FORMATTING.RESET} Current cpu usage:`);
+  console.info(`${FOREGROUND.YELLOW}[CPU]${FORMATTING.RESET} Startup cpu usage:`);
   console.log(`  User: ${formatCPUUsage(CPU_USAGE.user)}`);
   console.log(`  System: ${formatCPUUsage(CPU_USAGE.system)}`);
 
