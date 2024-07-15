@@ -1,7 +1,8 @@
 import { ZodError, ZodSchema, ZodIssueCode } from 'zod';
 import { HttpError } from '../classes';
 import { HTTP_STATUS_CODES } from '../constants';
-import { ZodValidationErrorDetail } from '../types';
+import { ZodValidationErrorDetail, ZodValidationOptions } from '../types';
+import { sanitize } from '../sanitize';
 
 /**
  * Validates an object against a Zod schema and throws an 400 HttpError if validation fails.
@@ -15,10 +16,26 @@ export const validateZodRequestSchema = (
   obj: Record<string, unknown>,
   schema: ZodSchema<unknown>,
   errorMsgPrefix: string,
+  options?: ZodValidationOptions,
 ): unknown => {
   try {
     // Use Zod schema to parse and validate the query parameters
-    return schema.parse(obj);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sanitizedSchema = schema.transform((data: any) => {
+      const sanitizedData: Record<string, unknown> = {};
+
+      Object.keys(data).forEach((key) => {
+        if (typeof data[key] === 'string') {
+          sanitizedData[key] = sanitize(data[key], options?.sanitizationOptions);
+        } else {
+          sanitizedData[key] = data[key];
+        }
+      });
+
+      return sanitizedData;
+    });
+
+    return sanitizedSchema.parse(obj);
   } catch (error) {
     if (error instanceof ZodError) {
       const formattedErrors = error.errors

@@ -16,10 +16,10 @@ describe('sanitize', () => {
     expect(result).toBe(' * FROM users');
   });
 
-  // Test case: JavaScript code removal
-  it('removes JavaScript code when removeJavaScriptCode is true', () => {
+  // Test case: script tags removal
+  it('removes script tags when removeScriptTags is true', () => {
     const input = '<script>alert("XSS")</script>';
-    const result = sanitize(input, { removeJavaScriptCode: true });
+    const result = sanitize(input, { removeScriptTags: true });
     expect(result).toBe('');
   });
 
@@ -37,7 +37,7 @@ describe('sanitize', () => {
     const result = sanitize(input, {
       removeHTMLTags: true,
       removeSQLInjectionPatterns: true,
-      removeJavaScriptCode: true,
+      removeScriptTags: true,
       removeNoSQLInjectionPatterns: true,
     });
     expect(result).toBe('Safe alert("XSS")  * FROM users { "": "this.field == \'value\'" }');
@@ -50,7 +50,7 @@ describe('sanitize', () => {
     const result = sanitize(input, {
       removeHTMLTags: false,
       removeSQLInjectionPatterns: false,
-      removeJavaScriptCode: false,
+      removeScriptTags: false,
       removeNoSQLInjectionPatterns: false,
     });
     expect(result).toBe(input);
@@ -63,7 +63,7 @@ describe('sanitize', () => {
     const result = sanitize(input, {
       removeHTMLTags: true,
       removeSQLInjectionPatterns: false,
-      removeJavaScriptCode: false,
+      removeScriptTags: false,
       removeNoSQLInjectionPatterns: true,
     });
     expect(result).toBe('Safe alert("XSS") SELECT * FROM users { "": "this.field == \'value\'" }');

@@ -7,6 +7,8 @@ import {
   validBlogPost,
   validProduct,
   validUser,
+  unsanitizedUser,
+  sanitizedUser,
 } from '__tests__/__mocks__/zodSchemaData';
 import { blogPostSchema, productSchema, userSchema } from '__tests__/__mocks__/zodSchemas';
 
@@ -57,5 +59,15 @@ describe('validateZodRequestSchema', () => {
     expect(() =>
       validateZodRequestSchema(invalidBlogPost, blogPostSchema, 'Blog post validation failed: '),
     ).toThrow(HttpError);
+  });
+
+  // Test case: Validate and sanitize a user object with unsanitized input
+  it('should sanitize and validate a user object with unsanitized input', () => {
+    const result = validateZodRequestSchema(
+      unsanitizedUser,
+      userSchema,
+      'User validation failed: ',
+    );
+    expect(result).toEqual(sanitizedUser);
   });
 });

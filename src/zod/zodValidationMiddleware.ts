@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { validateZodRequestSchema } from './validateZodRequestSchema';
 import { ZodSchema } from 'zod';
+import { ZodValidationOptions } from '../types';
 
 /**
  * Express middleware functions that add zod validation functions onto the request object.
@@ -8,14 +9,35 @@ import { ZodSchema } from 'zod';
  */
 export const zodValidationMiddlewareFunctions = (req: Request) => {
   // Params.
-  req.getZodValidatedParams = (schema: ZodSchema<unknown>): unknown =>
-    validateZodRequestSchema(req.params, schema, 'Request is malformed. Invalid path parameters: ');
+  req.getZodValidatedParams = (
+    schema: ZodSchema<unknown>,
+    options?: ZodValidationOptions,
+  ): unknown =>
+    validateZodRequestSchema(
+      req.params,
+      schema,
+      'Request is malformed. Invalid path parameters: ',
+      options,
+    );
 
   // Query.
-  req.getZodValidatedQuery = (schema: ZodSchema<unknown>): unknown =>
-    validateZodRequestSchema(req.query, schema, 'Request is malformed. Invalid query parameters: ');
+  req.getZodValidatedQuery = (
+    schema: ZodSchema<unknown>,
+    options?: ZodValidationOptions,
+  ): unknown =>
+    validateZodRequestSchema(
+      req.query,
+      schema,
+      'Request is malformed. Invalid query parameters: ',
+      options,
+    );
 
   // Request body.
-  req.getZodValidatedBody = (schema: ZodSchema<unknown>): unknown =>
-    validateZodRequestSchema(req.body, schema, 'Request is malformed. Invalid request body: ');
+  req.getZodValidatedBody = (schema: ZodSchema<unknown>, options?: ZodValidationOptions): unknown =>
+    validateZodRequestSchema(
+      req.body,
+      schema,
+      'Request is malformed. Invalid request body: ',
+      options,
+    );
 };

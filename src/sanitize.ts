@@ -13,7 +13,7 @@ export const sanitize = (
   options: SanitizeOptions = {
     removeHTMLTags: true,
     removeSQLInjectionPatterns: true,
-    removeJavaScriptCode: true,
+    removeScriptTags: true,
     removeNoSQLInjectionPatterns: true,
   },
 ): string => {
@@ -31,8 +31,8 @@ export const sanitize = (
   };
 
   // Remove JavaScript code
-  const removeJavaScriptCode = (str: string): string => {
-    return str.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+  const removeScriptTags = (str: string): string => {
+    return str.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
   };
 
   // Remove NoSQL injection patterns
@@ -48,8 +48,8 @@ export const sanitize = (
   if (options.removeSQLInjectionPatterns) {
     sanitizedString = removeSQLInjectionPatterns(sanitizedString);
   }
-  if (options.removeJavaScriptCode) {
-    sanitizedString = removeJavaScriptCode(sanitizedString);
+  if (options.removeScriptTags) {
+    sanitizedString = removeScriptTags(sanitizedString);
   }
   if (options.removeNoSQLInjectionPatterns) {
     sanitizedString = removeNoSQLInjectionPatterns(sanitizedString);
