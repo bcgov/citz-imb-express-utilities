@@ -16,6 +16,7 @@ nav:
           - errorWrapper: using-the-package/apis-&-components/error-wrapper.md
           - standardResponse: using-the-package/apis-&-components/standard-response.md
           - serverStartupLogs: using-the-package/apis-&-components/server-startup-logs.md
+          - sanitize: using-the-package/apis-&-components/sanitize.md
           - Ansi Codes: using-the-package/apis-&-components/ansi-codes.md
           - Zod:
               - Param Validation:
