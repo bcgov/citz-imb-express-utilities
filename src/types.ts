@@ -65,6 +65,13 @@ export type StandardResponse = {
   responseTimeInMs: string;
 };
 
+export type SanitizeOptions = {
+  removeHTMLTags?: boolean;
+  removeSQLInjectionPatterns?: boolean;
+  removeJavaScriptCode?: boolean;
+  removeNoSQLInjectionPatterns?: boolean;
+};
+
 declare module 'express-serve-static-core' {
   interface Request {
     getZodValidatedParams: (schema: ZodSchema<unknown>) => any;
