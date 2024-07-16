@@ -7,6 +7,7 @@ nav:
   - Introduction: index.md
   - Getting Started:
       - Installing the Package: getting-started/installing-the-package.md
+      - Quick Start Guide: getting-started/quick-start-guide.md
   - Using The Package:
       - APIs & Components:
           - Middleware: using-the-package/apis-&-components/middleware.md
