@@ -10,14 +10,13 @@ import { standardResponse } from './standardResponse';
  */
 export const expressUtilitiesMiddleware = (req: Request, res: Response, next: NextFunction) => {
   // Add elapsedTime function to response object.
-  elapsedTimeMiddlewareFunction(res);
+  elapsedTimeMiddlewareFunction(req);
 
   // Add Zod validation function to request object.
   zodValidationMiddlewareFunctions(req);
 
   // Add standard response function.
-  res.getStandardResponse = (inputData: StandardResponseInput) =>
-    standardResponse(inputData, req, res);
+  req.getStandardResponse = (inputData: StandardResponseInput) => standardResponse(inputData, req);
 
   next();
 };

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { getCurrentDateTime } from './helpers';
 import { StandardResponse, StandardResponseInput } from './types';
 
@@ -11,7 +11,6 @@ import { StandardResponse, StandardResponseInput } from './types';
 export const standardResponse = (
   dataInput: StandardResponseInput,
   req: Request,
-  res: Response,
 ): StandardResponse => {
   const { success = true, data, message } = dataInput;
   const dateTime = getCurrentDateTime();
@@ -22,6 +21,6 @@ export const standardResponse = (
     message: message ?? '',
     responseDateUTC: dateTime.formattedDateUTC,
     responseTimeUTC: dateTime.formattedTimeUTC,
-    responseTimeInMs: res.getElapsedTimeInMs(),
+    responseTimeInMs: req.getElapsedTimeInMs(),
   };
 };

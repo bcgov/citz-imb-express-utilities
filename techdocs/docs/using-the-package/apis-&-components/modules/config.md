@@ -1,9 +1,9 @@
 # configModule
 
-The `configModule` function provides a `/config` endpoint used to pass configuration variables to the frontend.
+The `configModule` function provides a `/config` endpoint used to pass configuration variables to the frontend. The most common use case for this module is to send the OpenShift environment to the frontend.
 
 !!! warning "Warning"
-    DO NOT send secrets or confidential data through this endpoint. It is not secure to pass these along to the frontend and you should find another solution that doesnt involve sending or storing secrets in the frontend.
+DO NOT send secrets or confidential data through this endpoint. It is not secure to pass these along to the frontend and you should find another solution that doesnt involve sending or storing secrets in the frontend.
 
 ## Import
 
@@ -26,7 +26,11 @@ import { configModule } from '@bcgov/citz-imb-express-utilities';
 // Define Express App
 const app = express();
 
-configModule(app);
+const configuration = {
+  ENVIRONMENT: process.env.ENVIRONMENT,
+};
+
+configModule(app, configuration);
 ```
 
 A basic example of calling the config route in the frontend:
@@ -43,7 +47,7 @@ interface Window {
 ```TypeScript
 // src/App.tsx
 
-// Fetchs config data and sets it on the window object 
+// Fetchs config data and sets it on the window object
 // so it can be accessed from anywhere in the application using window.configuration.
 export const App = () => {
   useEffect(() => {
@@ -64,6 +68,7 @@ export const App = () => {
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: configModule -->
+
 ```TypeScript
 const configModule: (app: Application, config: object) => void;
 ```
@@ -73,7 +78,7 @@ const configModule: (app: Application, config: object) => void;
 An API reference for the parameters of the `configModule` function.
 
 !!! note "Note"
-    The Name column starting with `*` means the prop is required.
+The Name column starting with `*` means the prop is required.
 
 <table>
   <!-- Table columns -->
