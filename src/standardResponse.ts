@@ -6,7 +6,6 @@ import { StandardResponse, StandardResponseInput } from './types';
  * Returns a standardized JSON response for express requests.
  * @param {StandardResponseInput} dataInput - Input data for the response.
  * @param {Request} req - Express request object.
- * @param {Response} res - Express response object.
  */
 export const standardResponse = (
   dataInput: StandardResponseInput,

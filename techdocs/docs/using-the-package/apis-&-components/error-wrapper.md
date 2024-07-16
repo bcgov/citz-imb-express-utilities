@@ -21,8 +21,15 @@ A basic example of using the `errorWrapper` function.
 
 ```JavaScript
 import { Request, Response } from 'express';
-import { errorWrapper, HttpError, HTTP_STATUS_CODES } from '@bcgov/citz-imb-express-utilities';
+import { errorWrapper, HttpError, HTTP_STATUS_CODES, stringParam } from '@bcgov/citz-imb-express-utilities';
 import { createUser } from './services/userService';
+import { z } from 'zod';
+
+// Create schema
+const bodySchema = z.object({
+    name: stringParam('name'), // validates a non-empty string
+    email: stringParam('email' true), // true means its optional
+  });
 
 /**
  * Create a new user.
@@ -30,17 +37,18 @@ import { createUser } from './services/userService';
  * @route /users
  */
 export const createUser = errorWrapper(async (req: Request, res: Response) => {
-  const { name, email } = req.body;
-
-  // Validate request body
-  if (!name || !email)
-    throw new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Name and email are required');
+  const { getZodValidatedBody, getStandardResponse } = req;
+  const { name, email } = getZodValidatedBody(bodySchema); // Validates request body
 
   // Call the service to create a new user
   const newUser = await createUser({ name, email });
 
+  if (!newUser) throw HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'User could not be created.');
+
   // Send a success response
-  res.status(201).json({ message: 'User created successfully', user: newUser });
+  const response =
+    getStandardResponse({ message: 'User created successfully', data: { user: newUser } });
+  res.status(HTTP_STATUS_CODES.CREATED).json(response);
 });
 ```
 

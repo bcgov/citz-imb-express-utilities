@@ -8,7 +8,7 @@ Add import for [serverStartupLogs] where you initialize your express server such
 
 This will provide useful information on server startup.
 
-Additionally when you want to log messages to the console and include color, use [ANSI_CODES].
+Additionally, when you want to log messages to the console and include color, use [ANSI_CODES].
 
 Here is an example of what the logs will look like:
 
@@ -102,8 +102,9 @@ The [getStandardResponse] function takes in some response data and returns a sta
 
 ```TypeScript
 import { Request, Response } from 'express';
-import { errorWrapper, HttpError, HTTP_STATUS_CODES } from '@bcgov/citz-imb-express-utilities';
+import { errorWrapper, HttpError, HTTP_STATUS_CODES, stringParam } from '@bcgov/citz-imb-express-utilities';
 import { createUser } from './services/userService';
+import { z } from 'zod';
 
 // Create schema
 const bodySchema = z.object({
@@ -139,7 +140,9 @@ export const createUser = errorWrapper(async (req: Request, res: Response) => {
 [configModule]: ../../using-the-package/apis-&-components/modules/config
 [errorWrapper]: ../../using-the-package/apis-&-components/error-wrapper
 [HttpError]: ../../using-the-package/apis-&-components/http-error
+[getStandardResponse]: ../../using-the-package/apis-&-components/standard-response
 [ANSI_CODES]: ../../using-the-package/apis-&-components/ansi-codes
+[getZodValidatedBody]: ../../using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-body
 [serverStartupLogs]: ../../using-the-package/apis-&-components/server-startup-logs
 [HTTP_STATUS_CODES]: ../../using-the-package/apis-&-components/http-status-codes
 [Zod Object Schema]: https://zod.dev/?id=objects

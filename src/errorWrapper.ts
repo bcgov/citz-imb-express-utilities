@@ -17,8 +17,7 @@ export const errorWrapper = (handler: ExpressRouteHandler, options: ErrorWrapper
       // Execute the request logic.
       await handler(req, res, next);
     } catch (error: unknown) {
-      const { method, originalUrl } = req;
-      const { getStandardResponse } = res;
+      const { method, originalUrl, getStandardResponse } = req;
 
       let statusCode: HttpStatusCode | number = HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
         message = 'An unexpected error occurred';
