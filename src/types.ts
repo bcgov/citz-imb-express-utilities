@@ -65,11 +65,22 @@ export type StandardResponse = {
   responseTimeInMs: string;
 };
 
+export type SanitizeOptions = {
+  removeHTMLTags?: boolean;
+  removeSQLInjectionPatterns?: boolean;
+  removeScriptTags?: boolean;
+  removeNoSQLInjectionPatterns?: boolean;
+};
+
+export type ZodValidationOptions = {
+  sanitizationOptions?: SanitizeOptions;
+};
+
 declare module 'express-serve-static-core' {
   interface Request {
-    getZodValidatedParams: (schema: ZodSchema<unknown>) => any;
-    getZodValidatedQuery: (schema: ZodSchema<unknown>) => any;
-    getZodValidatedBody: (schema: ZodSchema<unknown>) => any;
+    getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+    getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+    getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
   }
   interface Response {
     getElapsedTimeInMs: () => string;

@@ -35,3 +35,15 @@ export const invalidBlogPost = {
   published: 'true',
   tags: 'tag1, tag2',
 };
+
+export const unsanitizedUser = {
+  username: '<div>john_doe</div>',
+  email: 'john@example.com',
+  password: 'supersecurepassword<script>alert("XSS")</script>',
+};
+
+export const sanitizedUser = {
+  username: 'john_doe',
+  email: 'john@example.com',
+  password: 'supersecurepasswordalert("XSS")',
+};
