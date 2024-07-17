@@ -68,7 +68,7 @@ console.log(sanitized6); // Output: <div>Safe content</div> <script>alert("XSS")
 <!-- TYPE: sanitize -->
 
 ```TypeScript
-// placeholder
+const sanitize: (input: string, options?: SanitizeOptions) => string;
 ```
 
 Type of `SanitizeOptions`:
@@ -77,7 +77,12 @@ Type of `SanitizeOptions`:
 <!-- TYPE: SanitizeOptions -->
 
 ```TypeScript
-// placeholder
+type SanitizeOptions = {
+    removeHTMLTags?: boolean;
+    removeSQLInjectionPatterns?: boolean;
+    removeScriptTags?: boolean;
+    removeNoSQLInjectionPatterns?: boolean;
+}
 ```
 
 ## Parameters
