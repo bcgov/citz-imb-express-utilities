@@ -5,10 +5,10 @@ The `req.getZodValidatedQuery` function takes in [Zod Object Schema] as input an
 The difference is that the query params will be validated against the schema and transformed if the schema involves transforming the data. If an error is caught in the validation, an [HttpError] will be thrown.
 
 !!! warning "Attention"
-The use of this function requires the use of the [expressUtilitiesMiddleware]. You can access it as part of the request object on Express route handlers (controllers).
+    The use of this function requires the use of the [expressUtilitiesMiddleware]. You can access it as part of the request object on Express route handlers (controllers).
 
 !!! note "Note"
-String properties in the body will be sanitized using the [sanitize] function by default. You can modify this with the `options` parameter.
+    String properties in the body will be sanitized using the [sanitize] function by default. You can modify this with the `options` parameter.
 
 ## Usage
 
@@ -66,7 +66,7 @@ Type of `ZodValidationOptions`:
 An API reference for the parameters of the `getZodValidatedQuery` function.
 
 !!! note "Note"
-The Name column starting with `*` means the prop is required.
+    The Name column starting with `*` means the prop is required.
 
 <table>
   <!-- Table columns -->

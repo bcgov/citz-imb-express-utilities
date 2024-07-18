@@ -3,7 +3,7 @@
 The `errorWrapper` function is used as a wrapper for express route handlers (controllers) to provided error handling logic.
 
 !!! tip "Tip"
-Throw an [HttpError] in your route handler (controller) function to specify the status code for the error such as `404` for "Not Found", as well as a custom error message.
+    Throw an [HttpError] in your route handler (controller) function to specify the status code for the error such as `404` for "Not Found", as well as a custom error message.
 
 ## Import
 
@@ -100,7 +100,7 @@ type RouteHandlerErrorProperties = {
 An API reference for the parameters of the `errorWrapper` function.
 
 !!! note "Note"
-The Name column starting with `*` means the prop is required.
+    The Name column starting with `*` means the prop is required.
 
 <table>
   <!-- Table columns -->
