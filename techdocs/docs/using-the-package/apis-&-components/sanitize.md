@@ -29,11 +29,11 @@ const input3 = '{ "$where": "this.field == \'value\'" }';
 
 // 1. Remove only HTML tags
 const sanitized1 = sanitize(input1, { removeHTMLTags: true });
-console.log(sanitized1); // Output: Safe content alert("XSS")
+console.log(sanitized1); // Output: Safe content <script>alert("XSS")</script>
 
-// 2. Remove HTML tags and JavaScript code
-const sanitized2 = sanitize(input1, { removeHTMLTags: true, removeJavaScriptCode: true });
-console.log(sanitized2); // Output: Safe content
+// 2. Remove HTML tags and Script tags
+const sanitized2 = sanitize(input1, { removeHTMLTags: true, removeScriptTags: true });
+console.log(sanitized2); // Output: Safe content alert("XSS")
 
 // 3. Remove SQL injection patterns
 const sanitized3 = sanitize(input2, { removeSQLInjectionPatterns: true });
@@ -47,7 +47,7 @@ console.log(sanitized4); // Output: { "": "this.field == 'value'" }
 const sanitized5 = sanitize(input1, {
   removeHTMLTags: true,
   removeSQLInjectionPatterns: true,
-  removeJavaScriptCode: true,
+  removeScriptTags: true,
   removeNoSQLInjectionPatterns: true,
 });
 console.log(sanitized5); // Output: Safe content
@@ -90,7 +90,7 @@ type SanitizeOptions = {
 An API reference for the parameters of the `sanitize` function.
 
 !!! note "Note"
-The Name column starting with `*` means the prop is required.
+    The Name column starting with `*` means the prop is required.
 
 <table>
   <!-- Table columns -->
@@ -114,7 +114,7 @@ The Name column starting with `*` means the prop is required.
     <tr>
       <td>options</td>
       <td>SanitizeOptions</td>
-      <td>{ removeHTMLTags: true, removeSQLInjectionPatterns: true, removeJavaScriptCode: true, removeNoSQLInjectionPatterns: true }</td>
+      <td>{ removeHTMLTags: true, removeSQLInjectionPatterns: true, removeScriptTags: true, removeNoSQLInjectionPatterns: true }</td>
       <td>Configuration options.</td>
     </tr>
   </tbody>

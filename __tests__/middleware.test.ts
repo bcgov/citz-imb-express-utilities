@@ -62,17 +62,17 @@ app.post('/body', (req: Request, res: Response) => {
 });
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  elapsedTimeMiddlewareFunction(res);
+  elapsedTimeMiddlewareFunction(req);
   next();
 });
 
 app.get('/elapsed-time', (req: Request, res: Response) => {
-  res.json({ elapsedTime: res.getElapsedTimeInMs() });
+  res.json({ elapsedTime: req.getElapsedTimeInMs() });
 });
 
 app.get('/standard-response', (req: Request, res: Response) => {
   const input: StandardResponseInput = { success: true, data: { key: 'value' } };
-  const response = res.getStandardResponse(input);
+  const response = req.getStandardResponse(input);
   res.status(200).json(response);
 });
 

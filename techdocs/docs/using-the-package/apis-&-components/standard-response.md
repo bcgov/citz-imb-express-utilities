@@ -1,10 +1,10 @@
-# res.getStandardResponse
+# req.getStandardResponse
 
-The `res.getStandardResponse` function is used to standardize the JSON response structure for responses.
+The `req.getStandardResponse` function is used to standardize the JSON response structure for responses.
 
 ## Usage
 
-A basic example of using the `res.getStandardResponse` function.
+A basic example of using the `req.getStandardResponse` function.
 
 ```JavaScript
 import { z } from 'zod';
@@ -18,33 +18,31 @@ const paramSchema = z.object({
 
 // Route handler (controller)
 export const getItem = errorWrapper(async (req: Request, res: Response) => {
-  const { getZodValidatedParams } = req;
-  const { getStandardResponse } = res;
+  const { getZodValidatedParams, getStandardResponse } = req;
   const pathParams = getZodValidatedParams(paramSchema);
 
   // Get item from database using path params as a where clause
   const item = await getItemFromDBWhere(pathParams);
 
-  const response = { data: items };
-  res.status(HTTP_STATUS_CODES.OK).json(getStandardResponse(response));
+  const response = getStandardResponse({ data: items });
+  res.status(HTTP_STATUS_CODES.OK).json(response);
 });
 ```
 
 ## TypeScript Type
 
 <!-- The following code block is auto generated when types in the package change. -->
-<!-- TYPE: Response -->
+<!-- TYPE: Request -->
+
 ```TypeScript
-interface Response {
-        getElapsedTimeInMs: () => string;
-        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
-    }
+// placeholder
 ```
 
 Type of `StandardResponseInput`:
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: StandardResponseInput -->
+
 ```TypeScript
 type StandardResponseInput = {
     success?: boolean;
@@ -57,6 +55,7 @@ Type of `StandardResponse`:
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: StandardResponse -->
+
 ```TypeScript
 type StandardResponse = {
     success: boolean;

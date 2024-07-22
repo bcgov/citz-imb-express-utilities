@@ -7,6 +7,7 @@ nav:
   - Introduction: index.md
   - Getting Started:
       - Installing the Package: getting-started/installing-the-package.md
+      - Quick Start Guide: getting-started/quick-start-guide.md
   - Using The Package:
       - APIs & Components:
           - Middleware: using-the-package/apis-&-components/middleware.md
@@ -14,10 +15,12 @@ nav:
               - healthModule: using-the-package/apis-&-components/modules/health.md
               - configModule: using-the-package/apis-&-components/modules/config.md
           - errorWrapper: using-the-package/apis-&-components/error-wrapper.md
-          - standardResponse: using-the-package/apis-&-components/standard-response.md
+          - getStandardResponse: using-the-package/apis-&-components/standard-response.md
           - serverStartupLogs: using-the-package/apis-&-components/server-startup-logs.md
           - sanitize: using-the-package/apis-&-components/sanitize.md
           - Ansi Codes: using-the-package/apis-&-components/ansi-codes.md
+          - HttpError: using-the-package/apis-&-components/http-error.md
+          - HTTP_STATUS_CODES: using-the-package/apis-&-components/http-status-codes.md
           - Zod:
               - Param Validation:
                   - Req Params: using-the-package/apis-&-components/zod/request-schema-validation/get-zod-validated-params.md

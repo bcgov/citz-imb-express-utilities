@@ -21,15 +21,34 @@ A basic example of using the `errorWrapper` function.
 
 ```JavaScript
 import { Request, Response } from 'express';
-import { errorWrapper } from '@bcgov/citz-imb-express-utilities';
+import { errorWrapper, HttpError, HTTP_STATUS_CODES, stringParam } from '@bcgov/citz-imb-express-utilities';
+import { createUser } from './services/userService';
+import { z } from 'zod';
+
+// Create schema
+const bodySchema = z.object({
+    name: stringParam('name'), // validates a non-empty string
+    email: stringParam('email' true), // true means its optional
+  });
 
 /**
- * Check if application is healthy.
- * @method GET
- * @route /health
+ * Create a new user.
+ * @method POST
+ * @route /users
  */
-export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
-  res.send('Application is healthy!');
+export const createUser = errorWrapper(async (req: Request, res: Response) => {
+  const { getZodValidatedBody, getStandardResponse } = req;
+  const { name, email } = getZodValidatedBody(bodySchema); // Validates request body
+
+  // Call the service to create a new user
+  const newUser = await createUser({ name, email });
+
+  if (!newUser) throw HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'User could not be created.');
+
+  // Send a success response
+  const response =
+    getStandardResponse({ message: 'User created successfully', data: { user: newUser } });
+  res.status(HTTP_STATUS_CODES.CREATED).json(response);
 });
 ```
 
@@ -37,6 +56,7 @@ export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: errorWrapper -->
+
 ```TypeScript
 const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
 ```
@@ -45,6 +65,7 @@ Type of `ExpressRouteHandler`:
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: ExpressRouteHandler -->
+
 ```TypeScript
 type ExpressRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void | Response<unknown> | undefined>;
 ```
@@ -53,10 +74,10 @@ Type of `ErrorWrapperOptions`:
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: ErrorWrapperOptions -->
+
 ```TypeScript
 type ErrorWrapperOptions = {
-    customLogFunction?: (props: RouteHandlerErrorProperties) => void;
-    customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
+    logFunction?: (props: RouteHandlerErrorProperties) => void;
 }
 ```
 
@@ -64,6 +85,7 @@ Type of `RouteHandlerErrorProperties`:
 
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: RouteHandlerErrorProperties -->
+
 ```TypeScript
 type RouteHandlerErrorProperties = {
     method: string;
@@ -106,19 +128,14 @@ An API reference for the parameters of the `errorWrapper` function.
       <td>Configuration options.</td>
     </tr>
     <tr>
-      <td>options.customLogFunction</td>
+      <td>options.logFunction</td>
       <td>(props: RouteHandlerErrorProperties) => void;</td>
       <td>-</td>
       <td>Custom function to call instead of the default log message.</td>
-    </tr>
-    <tr>
-      <td>options.customJsonResponse</td>
-      <td>(props: RouteHandlerErrorProperties) => object;</td>
-      <td>-</td>
-      <td>Custom json response to send to the client.</td>
     </tr>
   </tbody>
 </table>
 
 <!-- Link References -->
+
 [HttpError]: ../http-error

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { HttpError } from '@/classes';
 import { HTTP_STATUS_CODES } from '@/constants';
 import { errorWrapper } from '@/errorWrapper';
+import { StandardResponse, StandardResponseInput } from '@/types';
 
 // Test suite for the errorWrapper function
 describe('errorWrapper', () => {
@@ -15,6 +16,15 @@ describe('errorWrapper', () => {
     mockRequest = {
       method: 'GET',
       originalUrl: '/test',
+      getStandardResponse: (dataInput: StandardResponseInput): StandardResponse => {
+        const { success = true, data, message } = dataInput;
+
+        return {
+          success,
+          data,
+          message: message ?? '',
+        } as StandardResponse;
+      },
     };
     mockResponse = {
       status: jest.fn().mockReturnThis(),
@@ -39,8 +49,12 @@ describe('errorWrapper', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(HTTP_STATUS_CODES.BAD_REQUEST);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      method: mockRequest.method,
-      originalUrl: mockRequest.originalUrl,
+      success: false,
+      data: {
+        method: mockRequest.method,
+        originalUrl: mockRequest.originalUrl,
+        statusCode: HTTP_STATUS_CODES.BAD_REQUEST,
+      },
       message: 'Custom error message',
     });
   });
@@ -54,8 +68,12 @@ describe('errorWrapper', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      method: mockRequest.method,
-      originalUrl: mockRequest.originalUrl,
+      success: false,
+      data: {
+        method: mockRequest.method,
+        originalUrl: mockRequest.originalUrl,
+        statusCode: HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
+      },
       message: 'Generic error',
     });
   });
@@ -65,8 +83,8 @@ describe('errorWrapper', () => {
     const error = new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Custom error message');
     mockHandler.mockRejectedValueOnce(error);
 
-    const customLogFunction = jest.fn();
-    const options = { customLogFunction };
+    const logFunction = jest.fn();
+    const options = { logFunction };
 
     await errorWrapper(mockHandler, options)(
       mockRequest as Request,
@@ -74,33 +92,11 @@ describe('errorWrapper', () => {
       mockNext,
     );
 
-    expect(customLogFunction).toHaveBeenCalledWith({
+    expect(logFunction).toHaveBeenCalledWith({
       method: mockRequest.method,
       originalUrl: mockRequest.originalUrl,
       statusCode: HTTP_STATUS_CODES.BAD_REQUEST,
       message: 'Custom error message',
-    });
-  });
-
-  // Test case: Ensure custom JSON response is used if provided
-  it('should use custom JSON response if provided', async () => {
-    const error = new HttpError(HTTP_STATUS_CODES.BAD_REQUEST, 'Custom error message');
-    mockHandler.mockRejectedValueOnce(error);
-
-    const customJsonResponse = jest.fn().mockReturnValue({
-      customKey: 'customValue',
-    });
-    const options = { customJsonResponse };
-
-    await errorWrapper(mockHandler, options)(
-      mockRequest as Request,
-      mockResponse as Response,
-      mockNext,
-    );
-
-    expect(mockResponse.status).toHaveBeenCalledWith(HTTP_STATUS_CODES.BAD_REQUEST);
-    expect(mockResponse.json).toHaveBeenCalledWith({
-      customKey: 'customValue',
     });
   });
 });

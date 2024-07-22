@@ -20,8 +20,7 @@ export type RouteHandlerErrorProperties = {
 };
 
 export type ErrorWrapperOptions = {
-  customLogFunction?: (props: RouteHandlerErrorProperties) => void;
-  customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
+  logFunction?: (props: RouteHandlerErrorProperties) => void;
 };
 
 export type PacificTimeZone = 'PDT' | 'PST';
@@ -81,8 +80,6 @@ declare module 'express-serve-static-core' {
     getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
     getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
     getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
-  }
-  interface Response {
     getElapsedTimeInMs: () => string;
     getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
   }
