@@ -54,12 +54,7 @@ declare const HTTP_STATUS_CODES: {
     readonly NOT_EXTENDED: 510;
 };
 
-declare const DEFAULT_CUSTOM_LOG_FUNCTION: ({ method, originalUrl, message, }: RouteHandlerErrorProperties) => void;
-declare const DEFAULT_CUSTOM_JSON_RESPONSE: ({ method, originalUrl, message, }: RouteHandlerErrorProperties) => {
-    method: string;
-    originalUrl: string;
-    message: string;
-};
+declare const DEFAULT_LOG_FUNCTION: ({ method, originalUrl, message, }: RouteHandlerErrorProperties) => void;
 
 declare const ANSI_CODES: {
     FOREGROUND: {
@@ -116,8 +111,7 @@ type RouteHandlerErrorProperties = {
     message: string;
 };
 type ErrorWrapperOptions = {
-    customLogFunction?: (props: RouteHandlerErrorProperties) => void;
-    customJsonResponse?: (props: RouteHandlerErrorProperties) => object;
+    logFunction?: (props: RouteHandlerErrorProperties) => void;
 };
 type PacificTimeZone = 'PDT' | 'PST';
 type UTCComponents = {
@@ -168,8 +162,6 @@ declare module 'express-serve-static-core' {
         getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
-    }
-    interface Response {
         getElapsedTimeInMs: () => string;
         getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
     }
@@ -207,7 +199,7 @@ declare const expressUtilitiesMiddleware: (req: Request, res: Response, next: Ne
 
 declare const sanitize: (input: string, options?: SanitizeOptions) => string;
 
-declare const standardResponse: (dataInput: StandardResponseInput, req: Request, res: Response) => StandardResponse;
+declare const standardResponse: (dataInput: StandardResponseInput, req: Request) => StandardResponse;
 
 declare const validUser: {
     username: string;
@@ -295,7 +287,7 @@ declare const blogPostSchema: z.ZodObject<{
     tags?: string[] | undefined;
 }>;
 
-declare const elapsedTimeMiddlewareFunction: (res: Response) => void;
+declare const elapsedTimeMiddlewareFunction: (req: Request) => void;
 
 declare const getCurrentDateTime: () => GetCurrentDateTime;
 
@@ -305,5 +297,5 @@ declare const configRouter: (config: object) => express_serve_static_core.Router
 
 declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
 
-export { ANSI_CODES, DEFAULT_CUSTOM_JSON_RESPONSE, DEFAULT_CUSTOM_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type SanitizeOptions, type StandardResponse, type StandardResponseInput, type UTCComponents, type ZodValidationErrorDetail, type ZodValidationOptions, blogPostSchema, booleanParam, configModule, configRouter, elapsedTimeMiddlewareFunction, errorWrapper, expressUtilitiesMiddleware, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, sanitize, sanitizedUser, serverStartupLogs, standardResponse, stringParam, transformRemoveEmpty, unsanitizedUser, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddlewareFunctions };
+export { ANSI_CODES, DEFAULT_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type SanitizeOptions, type StandardResponse, type StandardResponseInput, type UTCComponents, type ZodValidationErrorDetail, type ZodValidationOptions, blogPostSchema, booleanParam, configModule, configRouter, elapsedTimeMiddlewareFunction, errorWrapper, expressUtilitiesMiddleware, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, sanitize, sanitizedUser, serverStartupLogs, standardResponse, stringParam, transformRemoveEmpty, unsanitizedUser, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddlewareFunctions };
 ```

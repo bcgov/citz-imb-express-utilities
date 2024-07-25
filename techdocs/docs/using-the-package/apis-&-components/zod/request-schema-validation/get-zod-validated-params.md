@@ -48,6 +48,8 @@ interface Request {
         getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getElapsedTimeInMs: () => string;
+        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
     }
 ```
 
@@ -57,7 +59,9 @@ Type of `ZodValidationOptions`:
 <!-- TYPE: ZodValidationOptions -->
 
 ```TypeScript
-//placeholder
+type ZodValidationOptions = {
+    sanitizationOptions?: SanitizeOptions;
+}
 ```
 
 ## Parameters

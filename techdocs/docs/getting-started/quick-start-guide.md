@@ -91,7 +91,13 @@ As long as [expressUtilitiesMiddleware] is being used, you have access to [getZo
 <!-- TYPE: Request -->
 
 ```TypeScript
-// placeholder
+interface Request {
+        getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getElapsedTimeInMs: () => string;
+        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+    }
 ```
 
 The [getZodValidatedBody] function validates the request body against a [Zod Object Schema] schema and returns the processed data, which in this example is destructured as `name` and `email`.

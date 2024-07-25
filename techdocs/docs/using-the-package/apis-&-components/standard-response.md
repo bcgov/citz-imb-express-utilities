@@ -35,7 +35,13 @@ export const getItem = errorWrapper(async (req: Request, res: Response) => {
 <!-- TYPE: Request -->
 
 ```TypeScript
-// placeholder
+interface Request {
+        getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+        getElapsedTimeInMs: () => string;
+        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+    }
 ```
 
 Type of `StandardResponseInput`:
