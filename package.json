@@ -1,6 +1,6 @@
 {
   "name": "@bcgov/citz-imb-express-utilities",
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta4",
   "description": "BCGov Utilities for Express API",
   "author": "CITZ IMB Common Code <citz.codemvp@gov.bc.ca>",
   "license": "Apache-2.0",
