@@ -7,10 +7,10 @@ import { StandardResponse, StandardResponseInput } from './types';
  * @param {StandardResponseInput} dataInput - Input data for the response.
  * @param {Request} req - Express request object.
  */
-export const standardResponse = (
-  dataInput: StandardResponseInput,
+export const standardResponse = <TData>(
+  dataInput: StandardResponseInput<TData>,
   req: Request,
-): StandardResponse => {
+): StandardResponse<TData> => {
   const { success = true, data, message } = dataInput;
   const dateTime = getCurrentDateTime();
 

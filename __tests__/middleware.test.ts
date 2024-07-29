@@ -70,8 +70,12 @@ app.get('/elapsed-time', (req: Request, res: Response) => {
   res.json({ elapsedTime: req.getElapsedTimeInMs() });
 });
 
+type MockResponseData = {
+  key: string;
+};
+
 app.get('/standard-response', (req: Request, res: Response) => {
-  const input: StandardResponseInput = { success: true, data: { key: 'value' } };
+  const input: StandardResponseInput<MockResponseData> = { success: true, data: { key: 'value' } };
   const response = req.getStandardResponse(input);
   res.status(200).json(response);
 });

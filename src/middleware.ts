@@ -16,7 +16,8 @@ export const expressUtilitiesMiddleware = (req: Request, res: Response, next: Ne
   zodValidationMiddlewareFunctions(req);
 
   // Add standard response function.
-  req.getStandardResponse = (inputData: StandardResponseInput) => standardResponse(inputData, req);
+  req.getStandardResponse = <TData>(inputData: StandardResponseInput<TData>) =>
+    standardResponse<TData>(inputData, req);
 
   next();
 };
