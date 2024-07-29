@@ -49,15 +49,15 @@ export type ZodValidationErrorDetail = {
   message: string;
 };
 
-export type StandardResponseInput = {
+export type StandardResponseInput<TData> = {
   success?: boolean;
-  data: object;
+  data: TData;
   message?: string;
 };
 
-export type StandardResponse = {
+export type StandardResponse<TData> = {
   success: boolean;
-  data: object;
+  data: TData;
   message: string;
   responseDateUTC: string;
   responseTimeUTC: string;
@@ -81,6 +81,8 @@ declare module 'express-serve-static-core' {
     getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
     getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
     getElapsedTimeInMs: () => string;
-    getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+    getStandardResponse: <TData>(
+      inputData: StandardResponseInput<TData>,
+    ) => StandardResponse<TData>;
   }
 }

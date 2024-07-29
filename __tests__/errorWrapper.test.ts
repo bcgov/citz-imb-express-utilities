@@ -16,14 +16,16 @@ describe('errorWrapper', () => {
     mockRequest = {
       method: 'GET',
       originalUrl: '/test',
-      getStandardResponse: (dataInput: StandardResponseInput): StandardResponse => {
+      getStandardResponse: <TData>(
+        dataInput: StandardResponseInput<TData>,
+      ): StandardResponse<TData> => {
         const { success = true, data, message } = dataInput;
 
         return {
           success,
           data,
           message: message ?? '',
-        } as StandardResponse;
+        } as StandardResponse<TData>;
       },
     };
     mockResponse = {
