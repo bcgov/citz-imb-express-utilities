@@ -135,14 +135,14 @@ type ZodValidationErrorDetail = {
     received: string;
     message: string;
 };
-type StandardResponseInput = {
+type StandardResponseInput<TData> = {
     success?: boolean;
-    data: object;
+    data: TData;
     message?: string;
 };
-type StandardResponse = {
+type StandardResponse<TData> = {
     success: boolean;
-    data: object;
+    data: TData;
     message: string;
     responseDateUTC: string;
     responseTimeUTC: string;
@@ -163,7 +163,7 @@ declare module 'express-serve-static-core' {
         getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getElapsedTimeInMs: () => string;
-        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+        getStandardResponse: <TData>(inputData: StandardResponseInput<TData>) => StandardResponse<TData>;
     }
 }
 
@@ -199,7 +199,7 @@ declare const expressUtilitiesMiddleware: (req: Request, res: Response, next: Ne
 
 declare const sanitize: (input: string, options?: SanitizeOptions) => string;
 
-declare const standardResponse: (dataInput: StandardResponseInput, req: Request) => StandardResponse;
+declare const standardResponse: <TData>(dataInput: StandardResponseInput<TData>, req: Request) => StandardResponse<TData>;
 
 declare const validUser: {
     username: string;

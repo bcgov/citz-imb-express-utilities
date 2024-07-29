@@ -50,7 +50,7 @@ interface Request {
         getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
         getElapsedTimeInMs: () => string;
-        getStandardResponse: (inputData: StandardResponseInput) => StandardResponse;
+        getStandardResponse: <TData>(inputData: StandardResponseInput<TData>) => StandardResponse<TData>;
     }
 ```
 
