@@ -1,4 +1,4 @@
-import { GetCurrentDateTime, PacificTimeZone, UTCComponents } from '../types';
+import type { GetCurrentDateTime, PacificTimeZone, UTCComponents } from '../types';
 
 // Get current UTC date and time components
 const getCurrentUTCComponents = (): UTCComponents => {

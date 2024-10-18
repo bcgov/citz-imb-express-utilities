@@ -1,7 +1,7 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 import { validateZodRequestSchema } from './validateZodRequestSchema';
-import { ZodSchema } from 'zod';
-import { ZodValidationOptions } from '../types';
+import type { ZodSchema } from 'zod';
+import type { ZodValidationOptions } from '../types';
 
 /**
  * Express middleware functions that add zod validation functions onto the request object.

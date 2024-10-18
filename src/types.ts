@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import { Request, Response, NextFunction } from 'express';
-import { HTTP_STATUS_CODES } from './constants';
-import { ZodSchema } from 'zod';
+import type { Request, Response, NextFunction } from 'express';
+import type { HTTP_STATUS_CODES } from './constants';
+import type { ZodSchema } from 'zod';
 
 export type ExpressRouteHandler = (
   req: Request,
   res: Response,
   next: NextFunction,
+// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 ) => Promise<void | Response<unknown> | undefined>;
 
 export type HttpStatusCode = (typeof HTTP_STATUS_CODES)[keyof typeof HTTP_STATUS_CODES];
@@ -77,8 +78,11 @@ export type ZodValidationOptions = {
 
 declare module 'express-serve-static-core' {
   interface Request {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     getZodValidatedParams: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     getZodValidatedQuery: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     getZodValidatedBody: (schema: ZodSchema<unknown>, options?: ZodValidationOptions) => any;
     getElapsedTimeInMs: () => string;
     getStandardResponse: <TData>(

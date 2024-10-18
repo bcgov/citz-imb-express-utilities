@@ -1,6 +1,6 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 import { getCurrentDateTime } from './helpers';
-import { StandardResponse, StandardResponseInput } from './types';
+import type { StandardResponse, StandardResponseInput } from './types';
 
 /**
  * Returns a standardized JSON response for express requests.

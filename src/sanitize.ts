@@ -1,4 +1,4 @@
-import { SanitizeOptions } from './types';
+import type { SanitizeOptions } from './types';
 
 /**
  * Sanitizes a given input string by removing potentially harmful content

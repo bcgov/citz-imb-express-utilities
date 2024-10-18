@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { zodValidationMiddlewareFunctions } from './zod';
 import { elapsedTimeMiddlewareFunction } from './helpers';
-import { StandardResponseInput } from './types';
+import type { StandardResponseInput } from './types';
 import { standardResponse } from './standardResponse';
 
 /**

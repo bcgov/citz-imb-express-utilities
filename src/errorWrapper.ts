@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { HttpError } from './classes';
 import { DEFAULT_LOG_FUNCTION, HTTP_STATUS_CODES } from './constants';
-import { ErrorWrapperOptions, ExpressRouteHandler, HttpStatusCode } from './types';
+import type { ErrorWrapperOptions, ExpressRouteHandler, HttpStatusCode } from './types';
 
 /**
  * Wraps a route handler (controller) function with error handling logic.
@@ -19,8 +19,8 @@ export const errorWrapper = (handler: ExpressRouteHandler, options: ErrorWrapper
     } catch (error: unknown) {
       const { method, originalUrl, getStandardResponse } = req;
 
-      let statusCode: HttpStatusCode | number = HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR,
-        message = 'An unexpected error occurred';
+      let statusCode: HttpStatusCode | number = HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR;
+      let message = 'An unexpected error occurred';
 
       if (error instanceof HttpError) {
         statusCode = error.statusCode;

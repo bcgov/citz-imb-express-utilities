@@ -1,7 +1,7 @@
-import { ZodError, ZodSchema, ZodIssueCode } from 'zod';
+import { ZodError, type ZodSchema, ZodIssueCode } from 'zod';
 import { HttpError } from '../classes';
 import { HTTP_STATUS_CODES } from '../constants';
-import { ZodValidationErrorDetail, ZodValidationOptions } from '../types';
+import type { ZodValidationErrorDetail, ZodValidationOptions } from '../types';
 import { sanitize } from '../sanitize';
 
 /**
@@ -20,8 +20,8 @@ export const validateZodRequestSchema = (
 ): unknown => {
   try {
     // Use Zod schema to parse and validate the query parameters
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const sanitizedSchema = schema.transform((data: any) => {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        const sanitizedSchema = schema.transform((data: any) => {
       const sanitizedData: Record<string, unknown> = {};
 
       Object.keys(data).forEach((key) => {
