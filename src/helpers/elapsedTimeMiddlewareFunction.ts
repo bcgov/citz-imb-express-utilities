@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import type { Request } from 'express';
 
 /**
  * Express middleware function that adds a function to the request object that returns the elapsed time.

@@ -32,18 +32,18 @@ export const integerParam = (param: string, optional = false) =>
         .refine(
           (value) =>
             value === undefined ||
-            (!Number.isNaN(parseInt(value, 10)) && Number.isInteger(parseFloat(value))),
+            (!Number.isNaN(Number.parseInt(value, 10)) && Number.isInteger(Number.parseFloat(value))),
           {
             message: `\`${param}\` must be an integer or undefined.`,
           },
         )
-        .transform((value) => (value === undefined ? undefined : parseInt(value, 10)))
+        .transform((value) => (value === undefined ? undefined : Number.parseInt(value, 10)))
     : z
         .string()
         .refine(
-          (value) => !Number.isNaN(parseInt(value, 10)) && Number.isInteger(parseFloat(value)),
+          (value) => !Number.isNaN(Number.parseInt(value, 10)) && Number.isInteger(Number.parseFloat(value)),
           {
             message: `\`${param}\` must be an integer.`,
           },
         )
-        .transform((value) => parseInt(value, 10));
+        .transform((value) => Number.parseInt(value, 10));

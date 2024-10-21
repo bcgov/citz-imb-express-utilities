@@ -30,15 +30,15 @@ export const numberParam = (param: string, optional = false) =>
         .string()
         .optional()
         .refine(
-          (value) => value === undefined || (value !== '' && !Number.isNaN(parseFloat(value))),
+          (value) => value === undefined || (value !== '' && !Number.isNaN(Number.parseFloat(value))),
           {
             message: `\`${param}\` must be a number.`,
           },
         )
-        .transform((value) => (value === undefined ? undefined : parseFloat(value)))
+        .transform((value) => (value === undefined ? undefined : Number.parseFloat(value)))
     : z
         .string()
-        .refine((value) => value !== '' && !Number.isNaN(parseFloat(value)), {
+        .refine((value) => value !== '' && !Number.isNaN(Number.parseFloat(value)), {
           message: `\`${param}\` must be a number.`,
         })
-        .transform((value) => parseFloat(value));
+        .transform((value) => Number.parseFloat(value));

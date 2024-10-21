@@ -5,3 +5,4 @@ export * from './constants';
 export * from './modules';
 export * from './serverStartupLogs';
 export * from './middleware';
+export * from './safePromise';
