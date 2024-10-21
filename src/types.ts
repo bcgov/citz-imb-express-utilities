@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-unused-vars */
 import type { Request, Response, NextFunction } from 'express';
 import type { HTTP_STATUS_CODES } from './constants';
 import type { ZodSchema } from 'zod';

@@ -21,14 +21,14 @@ export const validateZodRequestSchema = (
   try {
     // Use Zod schema to parse and validate the query parameters
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        const sanitizedSchema = schema.transform((data: any) => {
+    const sanitizedSchema = schema.transform((data: any) => {
       const sanitizedData: Record<string, unknown> = {};
 
       Object.keys(data).forEach((key) => {
         if (typeof data[key] === 'string') {
-          sanitizedData[key] = sanitize(data[key], options?.sanitizationOptions);
+            sanitizedData[key] = sanitize(data[key], options?.sanitizationOptions);
         } else {
-          sanitizedData[key] = data[key];
+            sanitizedData[key] = data[key];
         }
       });
 
