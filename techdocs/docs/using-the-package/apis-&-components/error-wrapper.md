@@ -58,7 +58,7 @@ export const createUser = errorWrapper(async (req: Request, res: Response) => {
 <!-- TYPE: errorWrapper -->
 
 ```TypeScript
-const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
+const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response$1, next: NextFunction) => Promise<void>;
 ```
 
 Type of `ExpressRouteHandler`:
@@ -67,7 +67,7 @@ Type of `ExpressRouteHandler`:
 <!-- TYPE: ExpressRouteHandler -->
 
 ```TypeScript
-type ExpressRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void | Response<unknown> | undefined>;
+type ExpressRouteHandler = (req: Request, res: Response$1, next: NextFunction) => Promise<void | Response$1<unknown> | undefined>;
 ```
 
 Type of `ErrorWrapperOptions`:

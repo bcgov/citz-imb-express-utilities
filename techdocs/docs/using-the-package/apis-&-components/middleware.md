@@ -39,7 +39,7 @@ app.use('/health', healthRouter);
 <!-- The following code block is auto generated when types in the package change. -->
 <!-- TYPE: expressUtilitiesMiddleware -->
 ```TypeScript
-const expressUtilitiesMiddleware: (req: Request, res: Response, next: NextFunction) => void;
+const expressUtilitiesMiddleware: (req: Request, res: Response$1, next: NextFunction) => void;
 ```
 
 <!-- Link References -->

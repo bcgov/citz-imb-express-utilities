@@ -11,10 +11,10 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 ```TypeScript
 /// <reference types="qs" />
 import * as express from 'express';
-import { Request, Response, NextFunction, Application } from 'express';
+import { Request, Response as Response$1, NextFunction, Application } from 'express';
 import { ZodSchema, z } from 'zod';
-import * as qs from 'qs';
 import * as express_serve_static_core from 'express-serve-static-core';
+import * as qs from 'qs';
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -102,7 +102,7 @@ declare const ANSI_CODES: {
     };
 };
 
-type ExpressRouteHandler = (req: Request, res: Response, next: NextFunction) => Promise<void | Response<unknown> | undefined>;
+type ExpressRouteHandler = (req: Request, res: Response$1, next: NextFunction) => Promise<void | Response$1<unknown> | undefined>;
 type HttpStatusCode = (typeof HTTP_STATUS_CODES)[keyof typeof HTTP_STATUS_CODES];
 type RouteHandlerErrorProperties = {
     method: string;
@@ -167,7 +167,7 @@ declare module 'express-serve-static-core' {
     }
 }
 
-declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response, next: NextFunction) => Promise<void>;
+declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response$1, next: NextFunction) => Promise<void>;
 
 declare const stringParam: (param: string, optional?: boolean) => z.ZodString | z.ZodOptional<z.ZodString>;
 
@@ -195,11 +195,17 @@ declare const configModule: (app: Application, config: object) => void;
 
 declare const serverStartupLogs: (port?: number | string) => void;
 
-declare const expressUtilitiesMiddleware: (req: Request, res: Response, next: NextFunction) => void;
+declare const expressUtilitiesMiddleware: (req: Request, res: Response$1, next: NextFunction) => void;
+
+declare const safePromise: (promise: Promise<Response>) => Promise<[Error | null, Response | null]>;
 
 declare const sanitize: (input: string, options?: SanitizeOptions) => string;
 
 declare const standardResponse: <TData>(dataInput: StandardResponseInput<TData>, req: Request) => StandardResponse<TData>;
+
+declare const elapsedTimeMiddlewareFunction: (req: Request) => void;
+
+declare const getCurrentDateTime: () => GetCurrentDateTime;
 
 declare const validUser: {
     username: string;
@@ -287,15 +293,11 @@ declare const blogPostSchema: z.ZodObject<{
     tags?: string[] | undefined;
 }>;
 
-declare const elapsedTimeMiddlewareFunction: (req: Request) => void;
-
-declare const getCurrentDateTime: () => GetCurrentDateTime;
-
-declare const getConfig: (config: object) => (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
-
 declare const configRouter: (config: object) => express_serve_static_core.Router;
 
-declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
+declare const getConfig: (config: object) => (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response$1<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
 
-export { ANSI_CODES, DEFAULT_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type SanitizeOptions, type StandardResponse, type StandardResponseInput, type UTCComponents, type ZodValidationErrorDetail, type ZodValidationOptions, blogPostSchema, booleanParam, configModule, configRouter, elapsedTimeMiddlewareFunction, errorWrapper, expressUtilitiesMiddleware, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, sanitize, sanitizedUser, serverStartupLogs, standardResponse, stringParam, transformRemoveEmpty, unsanitizedUser, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddlewareFunctions };
+declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response$1<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
+
+export { ANSI_CODES, DEFAULT_LOG_FUNCTION, type ErrorWrapperOptions, type ExpressRouteHandler, type GetCurrentDateTime, HTTP_STATUS_CODES, HttpError, type HttpStatusCode, type PacificTimeZone, type RouteHandlerErrorProperties, type SanitizeOptions, type StandardResponse, type StandardResponseInput, type UTCComponents, type ZodValidationErrorDetail, type ZodValidationOptions, blogPostSchema, booleanParam, configModule, configRouter, elapsedTimeMiddlewareFunction, errorWrapper, expressUtilitiesMiddleware, getConfig, getCurrentDateTime, healthModule, integerParam, invalidBlogPost, invalidProduct, invalidUser, isHealthy, numberParam, productSchema, refineAtLeastOneNonEmpty, safePromise, sanitize, sanitizedUser, serverStartupLogs, standardResponse, stringParam, transformRemoveEmpty, unsanitizedUser, userSchema, validBlogPost, validProduct, validUser, validateZodRequestSchema, zodValidationMiddlewareFunctions };
 ```
