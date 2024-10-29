@@ -1,6 +1,6 @@
 export const safePromise = async (
 	promise: Promise<Response>,
-): Promise<[Error | null, Response | null]> => {
+): Promise<[Error, null] | [null, Response]> => {
 	try {
 		const response = await promise;
 
