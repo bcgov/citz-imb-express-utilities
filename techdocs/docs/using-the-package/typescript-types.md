@@ -13,8 +13,8 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 import * as express from 'express';
 import { Request, Response as Response$1, NextFunction, Application } from 'express';
 import { ZodSchema, z } from 'zod';
-import * as express_serve_static_core from 'express-serve-static-core';
 import * as qs from 'qs';
+import * as express_serve_static_core from 'express-serve-static-core';
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -197,15 +197,11 @@ declare const serverStartupLogs: (port?: number | string) => void;
 
 declare const expressUtilitiesMiddleware: (req: Request, res: Response$1, next: NextFunction) => void;
 
-declare const safePromise: (promise: Promise<Response>) => Promise<[Error | null, Response | null]>;
+declare const safePromise: (promise: Promise<Response>) => Promise<[Error, null] | [null, Response]>;
 
 declare const sanitize: (input: string, options?: SanitizeOptions) => string;
 
 declare const standardResponse: <TData>(dataInput: StandardResponseInput<TData>, req: Request) => StandardResponse<TData>;
-
-declare const elapsedTimeMiddlewareFunction: (req: Request) => void;
-
-declare const getCurrentDateTime: () => GetCurrentDateTime;
 
 declare const validUser: {
     username: string;
@@ -293,9 +289,13 @@ declare const blogPostSchema: z.ZodObject<{
     tags?: string[] | undefined;
 }>;
 
-declare const configRouter: (config: object) => express_serve_static_core.Router;
+declare const elapsedTimeMiddlewareFunction: (req: Request) => void;
+
+declare const getCurrentDateTime: () => GetCurrentDateTime;
 
 declare const getConfig: (config: object) => (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response$1<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
+
+declare const configRouter: (config: object) => express_serve_static_core.Router;
 
 declare const isHealthy: (req: Request<express_serve_static_core.ParamsDictionary, any, any, qs.ParsedQs, Record<string, any>>, res: Response$1<any, Record<string, any>>, next: express.NextFunction) => Promise<void>;
 
