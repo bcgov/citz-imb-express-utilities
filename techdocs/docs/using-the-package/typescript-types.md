@@ -10,11 +10,23 @@ For more in depth documentation on types, look at the `APIs & Components` pages.
 <!-- TYPESCRIPT TYPES -->
 ```TypeScript
 /// <reference types="qs" />
+import { z, ZodSchema } from 'zod';
 import * as express from 'express';
 import { Request, Response as Response$1, NextFunction, Application } from 'express';
-import { ZodSchema, z } from 'zod';
 import * as qs from 'qs';
 import * as express_serve_static_core from 'express-serve-static-core';
+
+declare const stringParam: (param: string, optional?: boolean) => z.ZodString | z.ZodOptional<z.ZodString>;
+
+declare const booleanParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, boolean | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, boolean, string>;
+
+declare const integerParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
+
+declare const numberParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
+
+declare const refineAtLeastOneNonEmpty: (keys: string[]) => (data: Record<string, unknown>) => boolean;
+
+declare const transformRemoveEmpty: <T extends Record<string, unknown>>(obj: T) => Partial<T>;
 
 declare const HTTP_STATUS_CODES: {
     readonly OK: 200;
@@ -137,12 +149,12 @@ type ZodValidationErrorDetail = {
 };
 type StandardResponseInput<TData> = {
     success?: boolean;
-    data: TData;
+    data?: TData;
     message?: string;
 };
 type StandardResponse<TData> = {
     success: boolean;
-    data: TData;
+    data?: TData;
     message: string;
     responseDateUTC: string;
     responseTimeUTC: string;
@@ -167,23 +179,11 @@ declare module 'express-serve-static-core' {
     }
 }
 
-declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response$1, next: NextFunction) => Promise<void>;
-
-declare const stringParam: (param: string, optional?: boolean) => z.ZodString | z.ZodOptional<z.ZodString>;
-
-declare const booleanParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, boolean | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, boolean, string>;
-
-declare const integerParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
-
-declare const numberParam: (param: string, optional?: boolean) => z.ZodEffects<z.ZodEffects<z.ZodOptional<z.ZodString>, string | undefined, string | undefined>, number | undefined, string | undefined> | z.ZodEffects<z.ZodEffects<z.ZodString, string, string>, number, string>;
-
-declare const refineAtLeastOneNonEmpty: (keys: string[]) => (data: Record<string, unknown>) => boolean;
-
-declare const transformRemoveEmpty: <T extends Record<string, unknown>>(obj: T) => Partial<T>;
-
 declare const validateZodRequestSchema: (obj: Record<string, unknown>, schema: ZodSchema<unknown>, errorMsgPrefix: string, options?: ZodValidationOptions) => unknown;
 
 declare const zodValidationMiddlewareFunctions: (req: Request) => void;
+
+declare const errorWrapper: (handler: ExpressRouteHandler, options?: ErrorWrapperOptions) => (req: Request, res: Response$1, next: NextFunction) => Promise<void>;
 
 declare class HttpError extends Error {
     statusCode: HttpStatusCode | number;

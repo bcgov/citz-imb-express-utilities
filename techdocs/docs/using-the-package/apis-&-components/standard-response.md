@@ -52,7 +52,7 @@ Type of `StandardResponseInput`:
 ```TypeScript
 type StandardResponseInput<TData> = {
     success?: boolean;
-    data: TData;
+    data?: TData;
     message?: string;
 }
 ```
@@ -65,7 +65,7 @@ Type of `StandardResponse`:
 ```TypeScript
 type StandardResponse<TData> = {
     success: boolean;
-    data: TData;
+    data?: TData;
     message: string;
     responseDateUTC: string;
     responseTimeUTC: string;
