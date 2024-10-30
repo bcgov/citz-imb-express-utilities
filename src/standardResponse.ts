@@ -14,12 +14,15 @@ export const standardResponse = <TData>(
   const { success = true, data, message } = dataInput;
   const dateTime = getCurrentDateTime();
 
-  return {
+  const response: StandardResponse<TData> = {
     success,
-    data,
     message: message ?? '',
     responseDateUTC: dateTime.formattedDateUTC,
     responseTimeUTC: dateTime.formattedTimeUTC,
     responseTimeInMs: req.getElapsedTimeInMs(),
   };
+
+  if (data) response.data = data;
+
+  return response;
 };

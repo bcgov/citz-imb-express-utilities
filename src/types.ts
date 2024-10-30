@@ -50,13 +50,13 @@ export type ZodValidationErrorDetail = {
 
 export type StandardResponseInput<TData> = {
   success?: boolean;
-  data: TData;
+  data?: TData;
   message?: string;
 };
 
 export type StandardResponse<TData> = {
   success: boolean;
-  data: TData;
+  data?: TData;
   message: string;
   responseDateUTC: string;
   responseTimeUTC: string;
